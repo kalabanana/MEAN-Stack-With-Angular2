@@ -1,0 +1,29 @@
+{
+  "name": "mean-ang2",
+  "version": "1.0.0",
+  "description": "MEAN stack with Angular2",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kalabanana/MEAN-Stack-With-Angular2.git"
+  },
+  "keywords": [
+    "MEAN",
+    "Stack",
+    "Angular",
+    "2"
+  ],
+  "author": "Qiu Mei",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kalabanana/MEAN-Stack-With-Angular2/issues"
+  },
+  "homepage": "https://github.com/kalabanana/MEAN-Stack-With-Angular2#readme",
+  "dependencies": {
+    "express": "^4.15.3",
+    "mongoose": "^4.11.5"
+  }
+}
