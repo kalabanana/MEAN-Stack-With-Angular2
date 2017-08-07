@@ -1,3 +1,45 @@
 <div class="jumbotron text-center" >
   <h2>Reserve Now! Deals ends at September!</h2>
 </div>
+<div style="float: right;">
+  <form class="form-inline">
+    <div class="form-group">
+      <label class="sr-only">Firstname & Lastname </label>
+      <input type="text" class="form-control" id="name" placeholder="First & Last name">
+      <select class="form-control">
+        <option>1 person</option>
+        <option>2 people</option>
+        <option>3 people</option>
+        <option>4 people</option>
+        <option>5 people</option>
+        <option>6 people</option>
+        <option>7 people</option>
+        <option>8 people</option>
+        <option>9 people</option>
+        <option>10 people</option>
+        <option>11 people</option>
+        <option>12 people</option>
+        <option>13 people</option>
+        <option>14 people</option>
+        <option>15 people</option>
+        <option>16 and up</option>
+
+      </select>
+      <div class="input-group date">
+        <input type="date" class="form-control">
+        <span class="input-group-addon">
+          <span class="glyphicon-calendar glyphicon"></span></span>
+        <script type="text/javascript">
+          $(function () {
+            $('#datetimepicker').datetimepicker({
+              minDate:new Date()});
+          });
+        </script>
+        <input type="time"class="form-control">
+      </div>
+      <button class="btn btn-primary">Reserve</button>
+    </div>
+  </form>
+</div>
+
+
