@@ -12,30 +12,34 @@
       <img class="first-slide" src="http://www.thevegancorner.com/wp-content/uploads/tvcimages/how-to-make-vegan-crepes/how-to-make-vegan-crepes-1500x844.jpg" alt="First slide">
       <div class="container">
         <div class="carousel-caption">
-          <h1>Reserve Now! Deals ends at September!</h1><br><br>
+          <h1>2 for $19.99! Deal ends at September!</h1>
+          <p> Limited offer ends at September. May exclude certain specials from the menu. Menu may differ in various Crepe Houses </p>
+          <a class="btn btn-lg btn-primary" href="#reserveForm" role="button">Quick Reserve</a>
         </div>
       </div>
-
     </div>
+
     <div class="item">
       <img class="second-slide" src="https://media.guim.co.uk/51f397f794a73ccd83b0bb79b982b4fff20c32bf/0_277_4666_2800/2000.jpg" alt="Second slide">
       <div class="container">
         <div class="carousel-caption">
-          <h1>Discover more food options from our special menu!</h1>
-          <p>Visit one of our restaurants today for more details. Menus may differ in various locations</p>
-          <p><a class="btn btn-lg btn-primary" href="#" role="button">Locate Crepe House</a></p>
+          <h1>Discover more healthy food options from our special menu!</h1>
+          <p>Visit one of our restaurants today for more details. Menu may differ in various Crepe Houses</p>
+          <a class="btn btn-lg btn-primary" href="#" role="button">Locate Crepe House</a>
         </div>
       </div>
-    </div>
-    <div style="z-index: 50; position: relative">
-      <div style="margin: auto" class="panel panel-default">
+    </div >
+      <div id="reserveForm" style="margin: auto" class="panel panel-default text-center">
         <div class="panel-body">
-          <span id="header2">Make your reservation with Crepe House now!</span>
+          <span id="header2">Reserve a table with Crepe House now!</span>
           <form class="form-inline"><br>
             <div class="form-group">
-              <label class="sr-only">Firstname & Lastname </label>
-              <input type="text" class="form-control" id="name" placeholder="First & Last name">
-              <select class="form-control">
+              <label class="sr-only">Firstname</label>
+              <input type="text" class="form-control" id="firstname" placeholder="First name">
+              <label class="sr-only">Firstname</label>
+              <input type="text" class="form-control" id="lastname" placeholder="Last name">
+
+              <select id="resPeople" class="form-control">
                 <option>1 person</option>
                 <option>2 people</option>
                 <option>3 people</option>
@@ -54,41 +58,23 @@
                 <option>16 and up</option>
               </select>
               <div class="input-group input-append date" id="datetimepicker">
-                <input type="date" class="form-control" minDate="new Date();">
+                <input name="setTodaysDate" type="date" class="form-control" minDate="new Date();">
                 <div class="input-group-addon add-on">
                   <span class="glyphicon-calendar glyphicon"></span>
                 </div>
                 <!--<script type="text/javascript">
-                  $(function () {
-                    $('#datetimepicker').datetimepicker({
-                      minDate:new Date()});
-                  });
+                  var today = new Date().toISOString().split('T')[0];
+                  document.getElementsByName("setTodaysDate")[0].setAttribute('min', today);
                 </script>-->
+                <div>
+                  <input type="time" id="myTime" class="form-control" min="09:00:00" max="17:00:00" step="1800">
+                </div>
               </div>
-              <select class="form-control">
-                <option>9: 00 AM</option>
-                <option>9: 30 AM</option>
-                <option>10: 00 AM</option>
-                <option>10: 30 AM</option>
-                <option>11: 00 AM</option>
-                <option>11: 30 AM</option>
-                <option>12: 00 PM</option>
-                <option>12: 30 PM</option>
-                <option>1: 00 PM</option>
-                <option>1: 30 PM</option>
-                <option>2: 00 PM</option>
-                <option>2: 30 PM</option>
-                <option>3: 00 PM</option>
-                <option>3: 30 PM</option>
-                <option>4: 00 PM</option>
-                <option>4: 30 PM</option>
-                <option>5: 00 PM</option>
-              </select>
+
               <button class="btn btn-primary">Reserve</button>
             </div>
           </form>
         </div>
-      </div>
     </div>
   </div>
 
