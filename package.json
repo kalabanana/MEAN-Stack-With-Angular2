@@ -23,8 +23,10 @@
   },
   "homepage": "https://github.com/kalabanana/MEAN-Stack-With-Angular2#readme",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.17.2",
     "express": "^4.15.3",
-    "mongoose": "^4.11.5"
+    "mongoose": "^4.10.8"
   },
   "devDependencies": {
     "@angular/cli": "^1.2.7"

@@ -31,7 +31,15 @@
 h1{
   font-size: 42px;
 }
-body, h1, p, input{
+body, h1, p, input, a{
   font-family: 'Merriweather', serif;
 }
-
+.reserveForm{
+  margin: auto;
+}
+.reserveForm a{
+  text-align: right;
+}
+#confirmCode{
+  width: 70%; margin: auto
+}

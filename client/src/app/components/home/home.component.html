@@ -29,61 +29,50 @@
         </div>
       </div>
     </div >
-      <div id="reserveForm" style="margin: auto" class="panel panel-default text-center">
-        <div class="panel-body">
-          <span id="header2">Reserve a table with Crepe House now!</span>
-          <form class="form-inline"><br>
-            <div class="form-group">
-              <label class="sr-only">Firstname</label>
-              <input type="text" class="form-control" id="firstname" placeholder="First name">
-              <label class="sr-only">Firstname</label>
-              <input type="text" class="form-control" id="lastname" placeholder="Last name">
 
-              <select id="resPeople" class="form-control">
-                <option>1 person</option>
-                <option>2 people</option>
-                <option>3 people</option>
-                <option>4 people</option>
-                <option>5 people</option>
-                <option>6 people</option>
-                <option>7 people</option>
-                <option>8 people</option>
-                <option>9 people</option>
-                <option>10 people</option>
-                <option>11 people</option>
-                <option>12 people</option>
-                <option>13 people</option>
-                <option>14 people</option>
-                <option>15 people</option>
-                <option>16 and up</option>
-              </select>
-              <div class="input-group input-append date" id="datetimepicker">
-                <input name="setTodaysDate" type="date" class="form-control" minDate="new Date();">
-                <div class="input-group-addon add-on">
-                  <span class="glyphicon-calendar glyphicon"></span>
-                </div>
-                <!--<script type="text/javascript">
-                  var today = new Date().toISOString().split('T')[0];
-                  document.getElementsByName("setTodaysDate")[0].setAttribute('min', today);
-                </script>-->
-                <div>
-                  <input type="time" id="myTime" class="form-control" min="09:00:00" max="17:00:00" step="1800">
-                </div>
-              </div>
-
-              <button class="btn btn-primary">Reserve</button>
-            </div>
-          </form>
-        </div>
-    </div>
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
   </div>
+</div>
+<!-- /.carousel -->
 
-  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div><!-- /.carousel -->
+
+
+<!-- Reservation Form -->
+<div id="reserveForm"  class="panel panel-default">
+  <div class="panel-body text-center">
+    <span id="header2">Reserve a table with Crepe House now!</span>
+    <form class="form-inline"><br>
+      <div class="form-group">
+        <label class="sr-only">Firstname</label>
+        <input type="text" class="form-control" id="firstname" placeholder="First name" required>
+        <label class="sr-only">Lastname</label>
+        <input type="text" class="form-control" id="lastname" placeholder="Last name" required>
+
+        <app-select></app-select>
+        <input type="date" name="setTodaysDate" name="myDate" id="myDate"  class="form-control" [min]="today">
+        <input type="time" name="myTime" id="myTime" class="form-control" min="09:00:00" max="17:00:00" step="1800" required>
+
+        <button class="btn btn-primary">Reserve</button>
+      </div>
+    </form>
+    <br>
+    <a (click)="showDialog = !showDialog" style="float: right; margin-right: 8%">Have a confirmation code already?</a>
+
+    <app-entercode [(visible)]="showDialog">
+      <h4 style="  font-family: 'Merriweather', serif;">Please enter confirmation code: </h4><br>
+      <input id="confirmCode" type="text" pattern="" class="form-control"><br>
+      <button class="btn btn-primary">Submit</button>
+      <button (click)="showDialog = !showDialog" class="btn">Close</button>
+    </app-entercode>
+
+  </div>
+</div>
+
+
