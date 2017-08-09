@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectComponent} from "../select/select.component";
 import { EntercodeComponent} from "../confirmation/entercode/entercode.component";
+import { ReserveFormComponent} from "../reserve-form/reserve-form.component"
 
 @Component({
   selector: 'app-home',
@@ -9,6 +10,7 @@ import { EntercodeComponent} from "../confirmation/entercode/entercode.component
 })
 export class HomeComponent implements OnInit {
   today: any
+  showDialog = false;
 
   ngOnInit(){
     this.today = new Date().toISOString().split('T')[0];
@@ -17,7 +19,4 @@ export class HomeComponent implements OnInit {
   constructor() {
   }
 
-  onSubmit(){
-    console.log('submit');
-  }
 }

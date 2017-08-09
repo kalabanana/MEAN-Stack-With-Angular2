@@ -45,34 +45,4 @@
 
 
 <!-- Reservation Form -->
-<div id="reserveForm"  class="panel panel-default">
-  <div class="panel-body text-center">
-    <span id="header2">Reserve a table with Crepe House now!</span>
-    <form class="form-inline"><br>
-      <div class="form-group">
-        <label class="sr-only">Firstname</label>
-        <input type="text" class="form-control" id="firstname" placeholder="First name" required>
-        <label class="sr-only">Lastname</label>
-        <input type="text" class="form-control" id="lastname" placeholder="Last name" required>
-
-        <app-select></app-select>
-        <input type="date" name="setTodaysDate" name="myDate" id="myDate"  class="form-control" [min]="today">
-        <input type="time" name="myTime" id="myTime" class="form-control" min="09:00:00" max="17:00:00" step="1800" required>
-
-        <button class="btn btn-primary">Reserve</button>
-      </div>
-    </form>
-    <br>
-    <a (click)="showDialog = !showDialog" style="float: right; margin-right: 8%">Have a confirmation code already?</a>
-
-    <app-entercode [(visible)]="showDialog">
-      <h4 style="  font-family: 'Merriweather', serif;">Please enter confirmation code: </h4><br>
-      <input id="confirmCode" type="text" pattern="" class="form-control"><br>
-      <button class="btn btn-primary">Submit</button>
-      <button (click)="showDialog = !showDialog" class="btn">Close</button>
-    </app-entercode>
-
-  </div>
-</div>
-
-
+<app-reserve-form></app-reserve-form>
