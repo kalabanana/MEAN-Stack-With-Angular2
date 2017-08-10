@@ -65,7 +65,7 @@ module.exports = (router) => {
                                                             } else {
                                                                 if (err.errors.telephone) {
                                                                     res.json({success: false, message: err.errors.telephone.message
-                                                                    }); 
+                                                                    });
                                                                 } else {
                                                                     res.json({success: false, message: err}); // Return any other error not already covered
                                                                 }

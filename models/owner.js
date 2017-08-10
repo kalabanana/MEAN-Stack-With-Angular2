@@ -8,7 +8,7 @@ let firstNameLength = (firstName) => {
     if(!firstName){
         return false;
     }else{
-        if(firstName.length < 3 || firstName.length >30){
+        if(firstName.length < 3 || firstName.length >= 30){
             return false
         }else {
             return true
@@ -43,7 +43,7 @@ let lastNameLength = (lastName) => {
     if(!lastName){
         return false;
     }else{
-        if(lastName.length < 3 || lastName.length >30){
+        if(lastName.length < 3 || lastName.length >= 30){
             return false
         }else {
             return true
@@ -72,13 +72,14 @@ const lastNameValidators = [
 ]
 
 
+
 // email validate
 let emailLengthCheck = (email) =>
 {
     if(!email){ //if email does'n exist
         return false;
     }else {
-        if(email.length <5 || email.length > 30){
+        if(email.length <5 || email.length >= 30){
             return false
         }else {
             return true;
@@ -111,7 +112,7 @@ let userNameLength = (username) => {
     if(!username){
         return false;
     }else{
-        if(username.length < 5 || username.length >12){
+        if(username.length < 5 || username.length >= 12){
             return false
         }else {
             return true
@@ -135,7 +136,7 @@ const usernameValidators = [
     },
     {
         validator: validUserName,
-        message: "Usernmae must not have any special characters"
+        message: "Username must not have any special characters"
     }
 
 ]
@@ -146,7 +147,7 @@ let phoneLength = (telephone) => {
     if(!telephone){
         return false;
     }else{
-        if(telephone.length < 10){
+        if(telephone.length < 10 || telephone.length >=15){
             return false
         }else {
             return true
@@ -166,7 +167,7 @@ let validPhone = (telephone) => {
 const telephoneValidators = [
     {
         validator: phoneLength,
-        message: "Telephone number should at least be 10 numbers"
+        message: "Telephone number should at least be 10 numbers but no more than 15"
     },
     {
         validator: validUserName,
@@ -191,8 +192,8 @@ let validPassword = (password) => {
     if(!password){
         return false;
     }else{
-        const regEx = new RegExp(/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[\d])(?=.*?[\W]).{8,35}$/)
-        return regEx.test(password);
+        const regExp = new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,30}$/)
+        return regExp.test(password);
     }
 }
 

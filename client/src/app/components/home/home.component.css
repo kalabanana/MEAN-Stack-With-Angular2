@@ -23,7 +23,7 @@
 h1{
   font-size: 42px;
 }
-body, h1, p, input, a{
+body, h1, p, input{
   font-family: 'Merriweather', serif;
 }
 
