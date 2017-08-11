@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
-const bcrypt =  require('bcrypt-nodejs') //middle ware use to encrypt password
+const bcrypt =  require('bcrypt-nodejs') //middleware use to encrypt password
 
 //first name validate
 let firstNameLength = (firstName) => {
@@ -159,7 +159,7 @@ let validPhone = (telephone) => {
     if (!telephone) {
         return false;
     } else {
-        const regExp = new RegExp(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/);
+        const regExp = new RegExp(/^(1?(-?\d{3})-?)?(\d{3})(-?\d{4})$/);
         return regExp.test(telephone);
     }
 }

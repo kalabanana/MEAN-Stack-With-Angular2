@@ -3,11 +3,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule} from "@angular/forms"
 import { FormsModule} from "@angular/forms";
 import { NgModule } from '@angular/core';
-
-
-import { HttpModule} from "@angular/http"
-import { AppComponent } from './app.component';
 import { AppRoutingModule} from "./app-routing.module";
+import { HttpModule} from "@angular/http"
+
+
+import { AppComponent } from './app.component';
 import { NavbarComponent} from "./components/navbar/navbar.component";
 import { HomeComponent} from "./components/home/home.component";
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -17,6 +17,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ReserveFormComponent } from './components/reserve-form/reserve-form.component';
 import { RegisterComponent} from "./components/register/register.component";
 
+import { AuthService} from "./services/auth.service"
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { RegisterComponent} from "./components/register/register.component";
     BrowserAnimationsModule,
     HttpModule,
   ],
-  providers: [],
+  providers: [ AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

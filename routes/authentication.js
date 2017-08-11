@@ -1,5 +1,8 @@
 const Owner = require('../models/owner');
 
+
+//in database
+
 module.exports = (router) => {
     //register route to register
     router.post('/register', (req, res) => {
@@ -41,7 +44,7 @@ module.exports = (router) => {
                                     if (err) {
                                         // Check if error is an error indicating duplicate account
                                         if (err.code === 11000) {
-                                            res.json({success: false, message: 'Username or e-mail already exists'});
+                                            res.json({ success: false, message: 'Email, Username or Telephone already exist.'});
                                         } else {
                                             if (err.errors) {
                                                 if (err.errors.firstName) {
@@ -83,7 +86,7 @@ module.exports = (router) => {
                                             }
                                         }
                                     } else {
-                                        res.json({success: true, message: 'Account registered!'}); // Return success
+                                        res.json({success: true, message: 'Account successfully registered!'}); // Return success
                                     }
                                 });
                             }
@@ -93,6 +96,39 @@ module.exports = (router) => {
             }
         }
     });
-
+    router.get('/checkUsername/:username', (req, res) => {
+        if (!req.params.username) {
+            res.json({ success: false, message: 'Username was not provided' }); // Return error
+        } else {
+            Owner.findOne({ username: req.params.username }, (err, owner) => {
+                if (err) {
+                    res.json({ success: false, message: err }); // Return connection error
+                } else {
+                    if (owner) {
+                        res.json({ success: false, message: 'Username is already taken' }); // Return as taken username
+                    } else {
+                        res.json({ success: true, message: 'Username is available' }); // Return as vailable username
+                    }
+                }
+            });
+        }
+    });
+    router.get('/checkEmail/:email', (req, res) => {
+        if (!req.params.email) {
+            res.json({ success: false, message: 'E-mail was not provided' }); // Return error
+        } else {
+            Owner.findOne({ email: req.params.email }, (err, owner) => {
+                if (err) {
+                    res.json({ success: false, message: err }); // Return connection error
+                } else {
+                    if (owner) {
+                        res.json({ success: false, message: 'E-mail is already taken' }); // Return as taken e-mail
+                    } else {
+                        res.json({ success: true, message: 'E-mail is available' }); // Return as available e-mail
+                    }
+                }
+            });
+        }
+    });
     return router; // Return router object to main index.js
 }

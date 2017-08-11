@@ -8,6 +8,7 @@ const config = require ('./config/database');
 const path = require ('path');
 const authentication = require('./routes/authentication')(router);
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 mongoose.connect(config.uri,(err)=> {
     if (err){
@@ -17,10 +18,21 @@ mongoose.connect(config.uri,(err)=> {
         console.log('Connected to database: ' + config.db)
     }
 });
+
 //Middleware
+// var corsOptions = {
+//     origin: 'http://example.com',
+//     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+// } not safe
+
+
+app.use(cors({
+    origin: 'http://localhost:4200' //cross origin domain
+}));
+
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
-
 // parse application/json
 app.use(bodyParser.json())
 
