@@ -1,0 +1,5 @@
+
+  <select class="form-control" #peopleCtrl (change)='SelectedValue = peopleCtrl.value' required>
+    <option *ngFor="let person of people" [value]="person.id">{{person.name}}</option>
+  </select>
+  <!-- <button (click)="getValueFromSelect()">Get value</button> -->

@@ -14,7 +14,7 @@
         <div class="carousel-caption">
           <h1>2 for $19.99! Deal ends at September!</h1>
           <p> Limited offer ends at September. May exclude certain specials from the menu. Menu may differ in various Crepe Houses </p>
-          <a class="btn btn-lg btn-primary" href="#reserveForm" role="button">Quick Reserve</a>
+          <button class="btn btn-lg btn-primary" (click)="goTo('rform');">Quick Reserve</button>
         </div>
       </div>
     </div>
@@ -26,7 +26,7 @@
           <h1>Discover more healthy food options from our special menu!</h1>
           <p>Visit one of our restaurants today for more details. Menu may differ in various Crepe Houses</p>
 
-          <a class="btn btn-lg btn-primary" href="#" role="button">Locate Crepe House</a>
+          <a class="btn btn-lg btn-primary">Locate Crepe House</a>
         </div>
       </div>
     </div >
@@ -44,6 +44,8 @@
 <!-- /.carousel -->
 
 <!-- Reservation Form -->
-<app-reserve-form></app-reserve-form>
+<div id="rform">
+  <app-reserve-form ></app-reserve-form>
+</div>
 
 

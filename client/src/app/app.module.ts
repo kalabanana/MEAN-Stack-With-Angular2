@@ -12,12 +12,13 @@ import { NavbarComponent} from "./components/navbar/navbar.component";
 import { HomeComponent} from "./components/home/home.component";
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SelectComponent } from './components/select/select.component';
-import { EntercodeComponent } from './components/confirmation/entercode/entercode.component';
+import { EntercodeComponent } from './components/confirmation/modal/modal.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ReserveFormComponent } from './components/reserve-form/reserve-form.component';
 import { RegisterComponent} from "./components/register/register.component";
+//import { LoginComponent} from "./components/login/login.component"
 
-import { AuthService} from "./services/auth.service"
+import { AuthService} from "./services/auth.service";
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { AuthService} from "./services/auth.service"
     FooterComponent,
     ReserveFormComponent,
     RegisterComponent,
+    //LoginComponent,
   ],
   imports: [
     BrowserModule,

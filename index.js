@@ -36,11 +36,17 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
+
 app.use(express.static(__dirname + '/client/dist/'));
+
+
 app.use('/authentication', authentication);
 
 app.get('*', (req, res) => {
+    console.log('receive the req from web side');
+    console.log((res));
     res.sendFile(path.join(__dirname + '/client/dist/index.html'));
 });
+
 
 app.listen(8080, () => console.log("listening on port 8080"));

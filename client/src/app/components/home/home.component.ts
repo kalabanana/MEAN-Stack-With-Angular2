@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectComponent} from "../select/select.component";
-import { EntercodeComponent} from "../confirmation/entercode/entercode.component";
+import { EntercodeComponent} from "../confirmation/modal/modal.component";
 import { ReserveFormComponent} from "../reserve-form/reserve-form.component"
 
 @Component({
@@ -18,5 +18,7 @@ export class HomeComponent implements OnInit {
 
   constructor() {
   }
-
+  goTo(location: string):void{
+    window.location.hash=location;
+  }
 }

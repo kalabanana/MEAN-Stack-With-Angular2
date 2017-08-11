@@ -1,10 +1,15 @@
 const Owner = require('../models/owner');
-
+const jwt = require('jsonwebtoken');
+const config = require('../config/database')
 
 //in database
 
 module.exports = (router) => {
     //register route to register
+    router.post('/get',(req, res)=>{
+        res.send('test');
+    });
+
     router.post('/register', (req, res) => {
         if (!req.body.firstName) {
             res.json({ success: false, message: 'You must provide a first name' }); // Return error
@@ -130,5 +135,39 @@ module.exports = (router) => {
             });
         }
     });
+
+
+    // above is for registration
+
+//     router.post('/login', (req, res) => {
+//         if (!req.body.email) {
+//             res.json({ success: false, message: 'Email was not provided'})
+//         }else {
+//             if(!req.body.password){
+//                 res.json({success: false, message: 'Password was not provided'})
+//             } else{
+//                 Owner.findOne({email: req.body.email.toLowerCase() }, (err, owner) => {
+//                     if(err){
+//                         res.json({success: false, message: err})
+//                     }else {
+//                         if(!owner){
+//                             res.json({success: false, message: "Email was not found"})
+//                         }else {
+//                             const validPassword = owner.comparePassword(req.body.password) //password that user provided
+//                             if(!validPassword){
+//                                 res.json({success: false, message: "Password does not match"})
+//                             }else{
+// // token for 24 hours
+//                                 const token =  jwt.sign({ownerId: owner.__id}, config.secret, {expiresIn: '24h'})
+//
+//                                 res.json({success: true, message: "Successfully Logged In!", token: token, owner:{email: owner.email}})
+//                             }
+//                         }
+//                     }
+//                 })
+//             }
+//         }
+//     });
+
     return router; // Return router object to main index.js
 }

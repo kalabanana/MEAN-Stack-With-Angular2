@@ -1,0 +1,22 @@
+.panel-body{
+  padding: 30px;
+}
+#header2{
+  font-family: 'Merriweather', serif;
+  font-size: 30px;
+}
+h1{
+  font-size: 42px;
+}
+body, h1, p, input, a{
+  font-family: 'Merriweather', serif;
+}
+.reserveForm{
+  margin: auto;
+}
+.reserveForm a{
+  text-align: right;
+}
+#confirmCode{
+  width: 70%; margin: auto
+}

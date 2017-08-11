@@ -1,0 +1,49 @@
+.page-header{
+  font-family: 'Merriweather', serif;
+}
+#div2{
+  margin-top: 60px;
+}
+#div1{
+  border-right: 1px solid rgba(86,96,106,0.20)
+}
+#fade-quote-carousel.carousel .carousel-inner .item {
+  opacity: 0;
+  -webkit-transition-property: opacity;
+  -ms-transition-property: opacity;
+  transition-property: opacity;
+}
+#fade-quote-carousel.carousel .carousel-inner .active {
+  opacity: 1;
+  -webkit-transition-property: opacity;
+  -ms-transition-property: opacity;
+  transition-property: opacity;
+}
+.carousel-indicators > li{
+  background: rgba(183,21,0,0.75);
+  padding: 3px;
+  border: 2px white solid;
+}
+img{
+  width: 100%;
+  border-radius: 15px;
+}
+span{
+  color: red;
+}
+.in{
+  font-family: 'Merriweather', serif;
+}
+.in input, .in li{
+  width: 80%;
+}
+
+#promo {
+  font-size: 16px;
+  width: 100%;
+  font-family: 'Merriweather', serif;
+}
+
+.show-hide-message{
+  width: 90%;
+}

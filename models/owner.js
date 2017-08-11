@@ -232,7 +232,7 @@ ownerSchema.pre('save',function (next){
 });
 
 //compare what user inputs with what's in database
-ownerSchema.methods.comparePassword = (password) => {
+ownerSchema.methods.comparePassword = function(password) {
     return bcrypt.compareSync(password, this.password)
 }
 

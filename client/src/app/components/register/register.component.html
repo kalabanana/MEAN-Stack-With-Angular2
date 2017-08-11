@@ -1,0 +1,167 @@
+<h1 class="page-header">Franchise Registration</h1>
+<div class="row">
+  <div id="div1" class="col-md-6">
+    <div class="row show-hide-message">
+      <div [ngClass]="messageClass">
+          {{message}}
+      </div>
+    </div>
+    <form name="registerForm" [formGroup]="registerForm" (submit)="onRegisterSubmit()">
+
+      <div class="form-group in">
+        <label for="firstName">First Name <span>*</span></label>
+        <div [ngClass]="{'has-error':(registerForm.controls.firstName.errors && registerForm.controls.firstName.dirty),
+        'has-success':!(registerForm.controls.firstName.errors) }">
+          <input type="text" id="firstName" name="firstName" class="form-control" placeholder="First Name" autocomplete="off" formControlName="firstName" required/>
+          <ul class="help-block ">
+            <li *ngIf="registerForm.controls.firstName.errors?.required && registerForm.controls.firstName.dirty">This field is required</li>
+            <!--if the field is defined with the question mark -->
+            <li *ngIf="(registerForm.controls.firstName.errors?.minlength || registerForm.controls.firstName.errors?.maxlength) && registerForm.controls.firstName.dirty">Minimum characters: 3, Maximum characters: 30</li>
+          <li *ngIf="registerForm.controls.firstName.errors?.validateFirstName && registerForm.controls.firstName.dirty ">Must provide a valid First Name</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="form-group in">
+        <label for="lastName">Last Name <span>*</span></label>
+        <div [ngClass]="{'has-error':(registerForm.controls.lastName.errors && registerForm.controls.lastName.dirty),
+        'has-success':!(registerForm.controls.lastName.errors) }">
+          <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Last Name" autocomplete="off" formControlName="lastName" required/>
+          <ul class="help-block">
+            <li *ngIf="registerForm.controls.lastName.errors?.required && registerForm.controls.lastName.dirty">This field is required</li>
+            <li *ngIf="(registerForm.controls.lastName.errors?.minlength || registerForm.controls.lastName.errors?.maxlength) && registerForm.controls.lastName.dirty">Minimum characters: 3, Maximum characters: 30</li>
+            <li *ngIf="registerForm.controls.lastName.errors?.validateLastName && registerForm.controls.lastName.dirty ">Must provide a valid Last Name</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <div class="form-group in">
+        <label for="username">Username <span>*</span></label>
+        <div [ngClass]="{'has-error':(registerForm.controls.username.errors && registerForm.controls.username.dirty) || (!usernameValid && registerForm.controls.username.dirty),
+        'has-success':!registerForm.controls.username.errors && usernameValid}">
+          <input type="text" id="username" name="username" class="form-control" placeholder="Username" autocomplete="off" formControlName="username" (blur)="checkUsername()" required/>
+          <ul class="help-block">
+            <li *ngIf="registerForm.controls.username.errors?.required && registerForm.controls.username.dirty">This field is required</li>
+            <li *ngIf="(registerForm.controls.username.errors?.minlength || registerForm.controls.username.errors?.maxlength) && registerForm.controls.username.dirty">Minimum characters: 3, Maximum characters: 30</li>
+            <li *ngIf="registerForm.controls.username.errors?.validateUsername && registerForm.controls.username.dirty ">Must provide a valid Username and no special characters</li>
+            <li *ngIf="usernameMessage">{{ usernameMessage }}</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <div class="form-group in">
+        <label for="password">Password <span>*</span></label>
+        <div [ngClass]="{'has-error':(registerForm.controls.password.errors && registerForm.controls.password.dirty),
+        'has-success':!(registerForm.controls.password.errors) }">
+          <input type="password" id="password" name="password" class="form-control" placeholder="Password" autocomplete="off" formControlName="password" required/>
+          <ul class="help-block">
+            <li *ngIf="registerForm.controls.password.errors?.required && registerForm.controls.password.dirty">This field is required</li>
+            <li *ngIf="(registerForm.controls.password.errors?.minlength || registerForm.controls.password.errors?.maxlength) && registerForm.controls.password.dirty">Minimum characters: 3, Maximum characters: 30</li>
+            <li *ngIf="registerForm.controls.password.errors?.validatePassword && registerForm.controls.password.dirty ">Must have at least one uppercase, lowercase, special character, and number</li>
+          </ul>
+        </div>
+      </div>
+
+
+
+      <div class="form-group in">
+        <label for="confirm">Confirm Password <span>*</span></label>
+        <div [ngClass]="{'has-error':(registerForm.controls.confirm.errors && registerForm.controls.confirm.dirty) ||
+       (registerForm.errors?.matchingPasswords && registerForm.controls.confirm.dirty),
+        'has-success':!(registerForm.controls.confirm.errors) && !(registerForm.errors?.matchingPasswords)}">
+          <input type="password" id="confirm" name="confirm" class="form-control" placeholder="Confirm Password" autocomplete="off" formControlName="confirm" required/>
+          <ul class="help-block">
+            <li *ngIf="registerForm.controls.confirm.errors?.required && registerForm.controls.confirm.dirty">This field is required</li>
+            <li *ngIf="registerForm.errors?.matchingPasswords">Passwords do not match</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <div class="form-group in">
+        <div [ngClass]="{'has-error':(registerForm.controls.email.errors && registerForm.controls.email.dirty) || (!emailValid && registerForm.controls.email.dirty),
+        'has-success':!registerForm.controls.email.errors && emailValid}">
+          <label for="email">Email <span>*</span></label>
+          <input type="email" id="email" name="email" class="form-control" placeholder="Email" autocomplete="off" formControlName="email" (blur)="checkEmail()" required/>
+          <ul class="help-block">
+            <li *ngIf="registerForm.controls.email.errors?.required && registerForm.controls.email.dirty">This field is required</li>
+            <li *ngIf="(registerForm.controls.email.errors?.minlength || registerForm.controls.email.errors?.maxlength) && registerForm.controls.email.dirty">Minimum characters: 3, Maximum characters: 30</li>
+            <li *ngIf="registerForm.controls.email.errors?.validateEmail && registerForm.controls.email.dirty ">Must provide a valid Email</li>
+            <li *ngIf="emailMessage">{{ emailMessage}}</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <div class="form-group in">
+        <div [ngClass]="{'has-error':(registerForm.controls.telephone.errors && registerForm.controls.telephone.dirty),
+        'has-success':!(registerForm.controls.telephone.errors) }">
+          <label for="telephone">Telephone <span>*</span></label>
+          <input type="tel" id="telephone" name="telephone" class="form-control" placeholder="Telephone" autocomplete="off" formControlName="telephone" required/>
+          <ul class="help-block">
+            <li *ngIf="registerForm.controls.telephone.errors?.required && registerForm.controls.telephone.dirty">This field is required</li>
+            <li *ngIf="registerForm.controls.telephone.errors?.validatePhone && registerForm.controls.telephone.dirty ">Must provide a valid Telephone Number</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="form-group in">
+        <label for="franCode">Franchise Code <span>*</span></label>
+        <div>
+          <input disabled="true" type="text" id="franCode" name="franCode" class="form-control" autocomplete="off" value="Qx76Sk562sgdfr"/>
+        </div>
+      </div>
+
+
+      <div class="form-group buttons">
+        <input [disabled]="!registerForm.valid || processing || !emailValid || !usernameValid " type="submit" class="btn btn-success" value="Submit">
+        <a routerLink="/login"> Already have an account? Login </a>
+      </div>
+    </form>
+  </div>
+
+  <!-- carousel -->
+  <div id="div2" class="col-md-6">
+    <section id="carousel" style="width: 90%; margin: auto;">
+      <div class="carousel slide" id="fade-quote-carousel" data-ride="carousel" data-interval="3000">
+        <!-- indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#fade-quote-carousel" data-slide-to="0" class="active"></li>
+          <li data-target="#fade-quote-carousel" data-slide-to="1"></li>
+          <li data-target="#fade-quote-carousel" data-slide-to="2"></li>
+        </ol>
+        <!-- items -->
+        <div class="carousel-inner">
+          <div class="active item">
+            <a href=""><img src="../../../assets/img/food3.jpg" alt="promotion"></a>
+          </div>
+          <div class="item">
+            <a href=""><img src="../../../assets/img/food4.jpg" alt="promotion"></a>
+          </div>
+          <div class="item">
+            <a href=""><img src="../../../assets/img/food5.jpg" alt="promotion"></a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <br><br>
+    <section id="promo" class="text-center">
+      <p style="width: 70%; margin: auto; text-align: center">Join now to start the opportunity to a new business path
+        with Crepe House in the United States.
+      </p> <br>
+      <button type="submit" class="btn btn-primary">Review Guideline</button>
+    </section>
+  </div>
+
+</div>
+
+<!--<p>firstName: {{registerForm.controls.firstName.value}}</p>-->
+<!--<p>lastName: {{registerForm.controls.lastName.value}}</p>-->
+<!--<p>username: {{registerForm.controls.username.value}}</p>-->
+<!--<p>password: {{registerForm.controls.password.value}}</p>-->
+<!--<p>email: {{registerForm.controls.email.value}}</p>-->
+<!--<p>telephone: {{registerForm.controls.telephone.value}}</p>-->
+
+
