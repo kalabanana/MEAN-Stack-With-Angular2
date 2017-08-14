@@ -213,22 +213,21 @@ const passwordValidators = [
 const ownerSchema = new Schema({
     firstName: {type: String, required: true, lowercase: true, validate: firstNameValidators},
     lastName: {type: String, required: true, lowercase: true, valida: lastNameValidators},
-    username: {type: String, required:true, lowercase:true, validate: usernameValidators},
+    username: {type: String, required:true, unique:true, lowercase:true, validate: usernameValidators},
     password:{type: String, required:true, validate: passwordValidators},
-    email: {type: String, required:true, lowercase:true, validate:emailValidators},
+    email: {type: String, required:true, unique:true, lowercase:true, validate:emailValidators},
     telephone:{type: String, required:true, validate: telephoneValidators},
 });
 
-ownerSchema.pre('save',function (next){
-    if(this.isModified('password')){
+ownerSchema.pre('save', function(next) {
+    if (!this.isModified('password'))
         return next();
 
-        bcrypt.hash(this.password, null, null, (err, hash) =>{
-                if(err) return next(err);
-                this.password = hash;
-                next();
-            })
-    }
+    bcrypt.hash(this.password, null, null, (err, hash) => {
+        if (err) return next(err);
+        this.password = hash;
+        next();
+    });
 });
 
 //compare what user inputs with what's in database

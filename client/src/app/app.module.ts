@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule} from "@angular/forms"
-import { FormsModule} from "@angular/forms";
 import { NgModule } from '@angular/core';
 import { AppRoutingModule} from "./app-routing.module";
 import { HttpModule} from "@angular/http"
@@ -16,9 +15,11 @@ import { EntercodeComponent } from './components/confirmation/modal/modal.compon
 import { FooterComponent } from './components/footer/footer.component';
 import { ReserveFormComponent } from './components/reserve-form/reserve-form.component';
 import { RegisterComponent} from "./components/register/register.component";
-//import { LoginComponent} from "./components/login/login.component"
+import { LoginComponent} from "./components/login/login.component"
+import { ProfileComponent } from "./components/profile/profile.component";
 
 import { AuthService} from "./services/auth.service";
+
 
 @NgModule({
   declarations: [
@@ -31,13 +32,14 @@ import { AuthService} from "./services/auth.service";
     FooterComponent,
     ReserveFormComponent,
     RegisterComponent,
-    //LoginComponent,
+    ProfileComponent,
+    LoginComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    //FormsModule,
     BrowserAnimationsModule,
     HttpModule,
   ],

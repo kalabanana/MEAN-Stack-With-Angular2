@@ -39,11 +39,11 @@
       <div class="form-group in">
         <label for="username">Username <span>*</span></label>
         <div [ngClass]="{'has-error':(registerForm.controls.username.errors && registerForm.controls.username.dirty) || (!usernameValid && registerForm.controls.username.dirty),
-        'has-success':!registerForm.controls.username.errors && usernameValid}">
+        'has-success':(!registerForm.controls.username.errors) && usernameValid }">
           <input type="text" id="username" name="username" class="form-control" placeholder="Username" autocomplete="off" formControlName="username" (blur)="checkUsername()" required/>
           <ul class="help-block">
             <li *ngIf="registerForm.controls.username.errors?.required && registerForm.controls.username.dirty">This field is required</li>
-            <li *ngIf="(registerForm.controls.username.errors?.minlength || registerForm.controls.username.errors?.maxlength) && registerForm.controls.username.dirty">Minimum characters: 3, Maximum characters: 30</li>
+            <li *ngIf="(registerForm.controls.username.errors?.minlength || registerForm.controls.username.errors?.maxlength) && registerForm.controls.username.dirty">Minimum characters: 5, Maximum characters: 12</li>
             <li *ngIf="registerForm.controls.username.errors?.validateUsername && registerForm.controls.username.dirty ">Must provide a valid Username and no special characters</li>
             <li *ngIf="usernameMessage">{{ usernameMessage }}</li>
           </ul>
@@ -58,7 +58,7 @@
           <input type="password" id="password" name="password" class="form-control" placeholder="Password" autocomplete="off" formControlName="password" required/>
           <ul class="help-block">
             <li *ngIf="registerForm.controls.password.errors?.required && registerForm.controls.password.dirty">This field is required</li>
-            <li *ngIf="(registerForm.controls.password.errors?.minlength || registerForm.controls.password.errors?.maxlength) && registerForm.controls.password.dirty">Minimum characters: 3, Maximum characters: 30</li>
+            <li *ngIf="(registerForm.controls.password.errors?.minlength || registerForm.controls.password.errors?.maxlength) && registerForm.controls.password.dirty">Minimum characters: 8, Maximum characters: 30</li>
             <li *ngIf="registerForm.controls.password.errors?.validatePassword && registerForm.controls.password.dirty ">Must have at least one uppercase, lowercase, special character, and number</li>
           </ul>
         </div>
@@ -87,7 +87,7 @@
           <input type="email" id="email" name="email" class="form-control" placeholder="Email" autocomplete="off" formControlName="email" (blur)="checkEmail()" required/>
           <ul class="help-block">
             <li *ngIf="registerForm.controls.email.errors?.required && registerForm.controls.email.dirty">This field is required</li>
-            <li *ngIf="(registerForm.controls.email.errors?.minlength || registerForm.controls.email.errors?.maxlength) && registerForm.controls.email.dirty">Minimum characters: 3, Maximum characters: 30</li>
+            <li *ngIf="(registerForm.controls.email.errors?.minlength || registerForm.controls.email.errors?.maxlength) && registerForm.controls.email.dirty">Minimum characters: 5, Maximum characters: 30</li>
             <li *ngIf="registerForm.controls.email.errors?.validateEmail && registerForm.controls.email.dirty ">Must provide a valid Email</li>
             <li *ngIf="emailMessage">{{ emailMessage}}</li>
           </ul>

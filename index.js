@@ -10,6 +10,7 @@ const authentication = require('./routes/authentication')(router);
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+
 mongoose.connect(config.uri,(err)=> {
     if (err){
         console.log('Could Not connect to database', err)
@@ -21,15 +22,12 @@ mongoose.connect(config.uri,(err)=> {
 
 //Middleware
 // var corsOptions = {
-//     origin: 'http://example.com',
+//     origin: 'http://localhost:4200',
 //     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-// } not safe
+// }
 
 
-app.use(cors({
-    origin: 'http://localhost:4200' //cross origin domain
-}));
-
+app.use(cors({ origin: 'http://localhost:8080' }));
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -43,8 +41,6 @@ app.use(express.static(__dirname + '/client/dist/'));
 app.use('/authentication', authentication);
 
 app.get('*', (req, res) => {
-    console.log('receive the req from web side');
-    console.log((res));
     res.sendFile(path.join(__dirname + '/client/dist/index.html'));
 });
 

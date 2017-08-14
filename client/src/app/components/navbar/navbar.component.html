@@ -25,11 +25,12 @@
             </div>
           </form>
         </li>
-        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/dashboard">Dashboard</a></li>
-        <li><a href="#contact">About</a></li>
-        <li><a href="#contact">Menu</a></li>
-        <li><a routerLink="/login">Login</a></li>
-        <li><a href="#contact">Logout</a></li>
+        <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/dashboard">Dashboard</a></li>
+        <li><a href="#About">About</a></li>
+        <li><a href="#Menu">Menu</a></li>
+        <li *ngIf="!authService.loggedIn()"><a routerLink="/login">Login</a></li>
+        <li *ngIf="authService.loggedIn()"><a routerLink="/profile">Profile</a></li>
+        <li *ngIf="authService.loggedIn()"><a (click)="onLogout()">Logout</a></li>
 
       </ul>
     </div><!--/.nav-collapse -->

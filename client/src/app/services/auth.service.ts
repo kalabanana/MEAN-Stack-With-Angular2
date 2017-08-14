@@ -1,40 +1,73 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map'
 import {Http, Headers, RequestOptions} from "@angular/http"
+import { tokenNotExpired } from 'angular2-jwt';
 
 @Injectable()
 export class AuthService {
 
-  domain  = "http://localhost:8080";
+  domain = "http://localhost:8080"; // Development Domain - Not Needed in Production
   authToken;
   owner;
+  options;
 
   constructor(
     private http: Http //import module
   ) { }
 
-  registerOwner(owner){
-    return this.http.post(this.domain+"/authentication/register", owner).map(res => res.json());
+  createAuthenticationHeaders() {
+    this.loadToken(); // Get token so it can be attached to headers
+    this.options = new RequestOptions({
+      headers: new Headers({
+        'Content-Type': 'application/json', // Format set to JSON
+        'authorization': this.authToken // Attach token
+      })
+    });
   }
+
+  loadToken(){
+    const token = localStorage.getItem('token');
+    this.authToken = token;
+  }
+
+  registerOwner(owner){
+    return this.http.post(this.domain + '/authentication/register', owner).map(res => res.json());
+  }
+
   checkUsername(username) {
     return this.http.get(this.domain + '/authentication/checkUsername/' + username).map(res => res.json());
   }
   checkEmail(email) {
     return this.http.get(this.domain + '/authentication/checkEmail/' + email).map(res => res.json());
   }
-  test(){
-    return this.http.post(this.domain, {test: "testing"});
+
+  // updateOwner(owner){
+  //   return this.http.post(this.domain+'/authentication/updateOwner', owner).map(res=> res.json());
+  // }
+
+
+  login(owner){
+    return this.http.post(this.domain + '/authentication/login', owner).map(res => res.json());
   }
 
 
+  loggedIn(){
+    return tokenNotExpired();
+  }
+  logout(){
+    this.authToken = null;
+    this.owner =null;
+    localStorage.clear();
+  }
+  storeOwnerData(token, owner) {
+    localStorage.setItem('token', token);
+    localStorage.setItem('owner', JSON.stringify(owner)); //
+    this.authToken = token; //
+    this.owner = owner; //
+  }
 
-  // login(owner){
-  //   return this.http.post(this.domain + '/authentication/login', owner).map(res => res.json());
-  // }
-  // storeOwnerData(token, owner){
-  //   localStorage.setItem('token',token);
-  //   localStorage.setItem('owner',JSON.stringify(owner));
-  //   this.authToken = token;
-  //   this.owner = owner;
-  // }
+  getProfile() {
+    this.createAuthenticationHeaders(); // Create headers before sending to API
+    return this.http.get(this.domain + '/authentication/profile', this.options).map(res => res.json());
+  }
 }

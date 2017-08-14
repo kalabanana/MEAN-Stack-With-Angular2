@@ -1,0 +1,179 @@
+<h1 class="page-header" style="  font-family: 'Merriweather', serif;">Update Profile</h1>
+<div class="container col-md-6" style="background-color: rgba(17,43,69,0.18); padding-top:20px">
+
+    <div class="panel panel-info">
+      <div class="panel-heading" >
+        <h3 class="panel-title" style="  font-family: 'Merriweather', serif;">My Personal Information</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div align="center">
+            <img src="../../../assets/img/logo.png" height="40%" width="40%" style="border-radius: 140px"/></div>
+          <div>
+            <br>
+            <table class="table table-user-information">
+              <tbody>
+              <tr>
+                <td>Username:</td>
+                <td>{{username}}</td>
+              </tr>
+              <tr>
+                <td>First Name:</td>
+                <td>{{firstName}}</td>
+              </tr>
+              <tr>
+                <td>Last Name:</td>
+                <td>{{lastName}}</td>
+              </tr>
+              <hr>
+              <tr>
+                <td>Email:</td>
+                <td>{{email}}</td>
+              </tr>
+              <tr>
+                <td>Telephone:</td>
+                <td>{{telephone}}</td>
+              </tr>
+              </tbody>
+            </table>
+            <a href="" class="btn btn-primary text-center" style="float: right; margin-right: 10%" >Sales Performance</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+<div class="container col-md-6 background">
+  <div class="row main">
+    <div class="main-login main-center">
+
+      <form [formGroup]="profileForm" class="form-horizontal">
+
+        <div class="form-group">
+          <label for="username" class="cols-sm-2 control-label">Username</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+              <input disabled="true" type="text" class="form-control" name="username" id="username" value="{{username}}" formControlName="username" />
+            </div>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="firstName" class="cols-sm-2 control-label">First Name</label>
+          <div class="cols-sm-10" >
+            <div [ngClass]="{'has-error':(profileForm.controls.firstName.errors && profileForm.controls.firstName.dirty),
+        'has-success':!profileForm.controls.firstName.errors}" class="input-group">
+              <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+              <input type="text" class="form-control" name="firstName" id="firstName"  placeholder="First Name" value="{{firstName}}" formControlName="firstName" />
+            </div>
+            <ul class="help-block">
+              <li *ngIf="profileForm.controls.firstName.errors?.required && profileForm.controls.firstName.dirty">This field is required</li>
+              <li *ngIf="(profileForm.controls.firstName.errors?.minlength || profileForm.controls.firstName.errors?.maxlength) && profileForm.controls.firstName.dirty">Minimum characters: 3, Maximum characters: 30</li>
+              <li *ngIf="profileForm.controls.firstName.errors?.validateFirstName && profileForm.controls.firstName.dirty ">Must provide a valid First Name</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="form-group">
+            <label for="lastName" class="cols-sm-2 control-label">Last Name</label>
+            <div class="cols-sm-10">
+              <div [ngClass]="{'has-error':(profileForm.controls.lastName.errors && profileForm.controls.lastName.dirty),
+        'has-success':!(profileForm.controls.lastName.errors)}" class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" name="lastName" id="lastName"  placeholder="Last Name" value="{{lastName}}" formControlName="lastName" />
+              </div>
+            </div>
+            <ul class="help-block">
+              <li *ngIf="profileForm.controls.lastName.errors?.required && profileForm.controls.lastName.dirty">This field is required</li>
+              <li *ngIf="(profileForm.controls.lastName.errors?.minlength || profileForm.controls.lastName.errors?.maxlength) && profileForm.controls.lastName.dirty">Minimum characters: 3, Maximum characters: 30</li>
+              <li *ngIf="profileForm.controls.lastName.errors?.validateLastName && profileForm.controls.lastName.dirty ">Must provide a valid Last Name</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="cols-sm-2 control-label">Email</label>
+          <div class="cols-sm-10">
+            <div [ngClass]="{'has-error':(profileForm.controls.email.errors && profileForm.controls.email.dirty) || (!emailValid && profileForm.controls.email.dirty),
+        'has-success':!profileForm.controls.email.errors && emailValid}" class="input-group">
+              <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+              <input type="text" class="form-control" name="email" id="email" placeholder="Email" value="{{email}}" formControlName="email" />
+            </div>
+            <ul class="help-block">
+              <li *ngIf="profileForm.controls.email.errors?.required && profileForm.controls.email.dirty">This field is required</li>
+              <li *ngIf="(profileForm.controls.email.errors?.minlength || profileForm.controls.email.errors?.maxlength) && profileForm.controls.email.dirty">Minimum characters: 3, Maximum characters: 30</li>
+              <li *ngIf="profileForm.controls.email.errors?.validateEmail && profileForm.controls.email.dirty ">Must provide a valid Email</li>
+              <li *ngIf="emailMessage">{{ emailMessage}}</li>
+            </ul>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="telephone" class="cols-sm-2 control-label">Telephone</label>
+          <div class="cols-sm-10">
+            <div class="input-group" [ngClass]="{'has-error':(profileForm.controls.telephone.errors && profileForm.controls.telephone.dirty),
+        'has-success':!(profileForm.controls.telephone.errors) }">
+              <span class="input-group-addon"><i class="fa fa-phone fa" aria-hidden="true"></i></span>
+              <input type="text" class="form-control" name="telephone" id="telephone"  placeholder="Telephone" value="{{telephone}}" formControlName="telephone" />
+            </div>
+            <ul class="help-block">
+              <li *ngIf="profileForm.controls.telephone.errors?.required && profileForm.controls.telephone.dirty">This field is required</li>
+              <li *ngIf="profileForm.controls.telephone.errors?.validatePhone && profileForm.controls.telephone.dirty ">Must provide a valid Telephone Number</li>
+            </ul></div>
+        </div>
+
+
+        <div class="form-group">
+          <span style="font-size:10px; font-family: 'Merriweather', serif; color: red"> * Please re-enter your password or enter a new password </span>
+          <br>
+          <label for="password" class="cols-sm-2 control-label">Password</label>
+          <div class="cols-sm-10">
+            <div class="input-group" [ngClass]="{'has-error':(profileForm.controls.password.errors && profileForm.controls.password.dirty),
+        'has-success':!(profileForm.controls.password.errors)}">
+              <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+              <input type="password" class="form-control" name="password" id="password" data-toggle="popover" placeholder="New password" formControlName="password" />
+            </div>
+          </div>
+          <ul class="help-block">
+            <li *ngIf="profileForm.controls.password.errors?.required && profileForm.controls.password.dirty">This field is required</li>
+            <li *ngIf="(profileForm.controls.password.errors?.minlength || profileForm.controls.password.errors?.maxlength) && profileForm.controls.password.dirty">Minimum characters: 3, Maximum characters: 30</li>
+            <li *ngIf="profileForm.controls.password.errors?.validatePassword && profileForm.controls.password.dirty ">Must have at least one uppercase, lowercase, special character, and number</li>
+          </ul>
+        </div>
+
+        <div class="form-group">
+          <label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
+          <div class="cols-sm-10">
+            <div class="input-group" [ngClass]="{'has-error':(profileForm.controls.confirm.errors && profileForm.controls.confirm.dirty) ||
+       (profileForm.errors?.matchingPasswords && profileForm.controls.confirm.dirty),
+        'has-success':!(profileForm.controls.confirm.errors) && !(profileForm.errors?.matchingPasswords)}">
+              <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+              <input type="password" class="form-control" name="confirm" id="confirm" data-toggle="popover" placeholder="Confirm password" formControlName="confirm" />
+            </div>
+            <ul class="help-block">
+              <li *ngIf="profileForm.controls.confirm.errors?.required && profileForm.controls.confirm.dirty">This field is required</li>
+              <li *ngIf="profileForm.errors?.matchingPasswords">Passwords do not match</li>
+            </ul>
+          </div>
+        </div>
+
+        <div id="code" class="form-group">
+          <label for="franCode">Franchise Code</label>
+          <div class="cols-sm-10">
+            <input disabled="true" type="text" id="franCode" name="franCode" class="form-control" autocomplete="off" value="Qx76Sk562sgdfr"/>
+          </div>
+        </div>
+
+        <div class="form-group ">
+          <button [disabled]="!profileForm.valid || processing" type="button" class="btn btn-success btn-lg btn-block update-button">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

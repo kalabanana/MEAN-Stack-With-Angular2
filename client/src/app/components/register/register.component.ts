@@ -156,34 +156,6 @@ export class RegisterComponent implements OnInit {
     this.registerForm.controls['email'].enable();
     this.registerForm.controls['telephone'].enable();
   }
-  onRegisterSubmit(){
-    this.processing = true;
-    this.disableForm();
-    const owner= {
-      firstName: this.registerForm.get('firstName').value,
-      lastName: this.registerForm.get('lastName').value,
-      username: this.registerForm.get('username').value,
-      password: this.registerForm.get('password').value,
-      email: this.registerForm.get('email').value,
-      telephone:this.registerForm.get('telephone').value
-    }
-    this.authenService.registerOwner(owner).subscribe( data => {
-      if(!data.success){
-        this.messageClass = 'alert alert-danger';
-        this.message = data.message;
-        this.processing = false;
-        this.enableForm();
-      }else{
-        this.messageClass = 'alert alert-success';
-        this.message = data.message;
-        this.processing = true;
-        setTimeout(() =>{
-          //this.router.navigate(['/login'], 5000)
-        })
-      }
-    })
-  }
-
   checkEmail(){
     this.authenService.checkEmail(this.registerForm.get('email').value).subscribe(data => {
       if(!data.success){
@@ -206,10 +178,37 @@ export class RegisterComponent implements OnInit {
       }
     })
   }
-  ngOnInit() {
-    this.authenService.test().subscribe(res=>{
-      console.log(res);
+  onRegisterSubmit(){
+    this.processing = true;
+    this.disableForm();
+    const owner= {
+      firstName: this.registerForm.get('firstName').value,
+      lastName: this.registerForm.get('lastName').value,
+      username: this.registerForm.get('username').value,
+      password: this.registerForm.get('password').value,
+      email: this.registerForm.get('email').value,
+      telephone:this.registerForm.get('telephone').value
+    }
+
+    this.authenService.registerOwner(owner).subscribe( data => {
+      if(!data.success){
+        this.messageClass = 'alert alert-danger';
+        this.message = data.message;
+        this.processing = false;
+        this.enableForm();
+      }else{
+        this.messageClass = 'alert alert-success';
+        this.message = data.message;
+        this.processing = true;
+        setTimeout(() =>{
+          this.router.navigate(['/login'], 2000)
+        })
+      }
     })
+  }
+
+
+  ngOnInit() {
   }
 
 }
