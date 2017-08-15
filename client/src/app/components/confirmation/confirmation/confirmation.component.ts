@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookService } from "../../../services/book.service";
-import { Router } from "@angular/router"
+import { ActivatedRoute, Router } from "@angular/router"
 
 @Component({
   selector: 'app-confirmation',
@@ -9,19 +9,34 @@ import { Router } from "@angular/router"
 })
 export class ConfirmationComponent implements OnInit {
 
-  name
-  date
-  party
-  book;
+  booking;
+  name;
+  party;
+  date;
+  id;
+  currentUrl;
 
-  constructor(private bookService : BookService) { }
+  message
+  messageClass;
+  loading = true;
+
+
+  constructor(private bookService : BookService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    //   this.bookService.getReservation().subscribe(confirmation => {
-    //     this.name = confirmation.book.name; // Set username
-    //     this.date = confirmation.book.date; // Set e-mail
-    //     this.party = confirmation.book.party;
-    //     this.book = confirmation.book;
-    // })};
+    this.currentUrl = this.activatedRoute.snapshot.params;
+    this.bookService.getReservation(this.currentUrl.id).subscribe(data => {
+      if (!data.success) {
+        this.messageClass = 'alert alert-danger';
+        this.message = 'confirmation code not found.';
+      } else {
+        this.booking = data.booking;
+        this.name = data.booking.name;
+        this.party = data.booking.party;
+        this.date = data.booking.date;
+        this.id = data.booking._id;
+        this.loading = false;
+      }
+    });
   }
 }

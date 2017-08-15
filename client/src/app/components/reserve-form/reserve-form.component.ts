@@ -63,7 +63,6 @@ export class ReserveFormComponent implements OnInit {
       name: this.reserveForm.get('name').value,
       party: this.reserveForm.get('party').value,
       date: this.reserveForm.get('date').value,
-      //time: this.reserveForm.get('time').value
     }
 
     this.bookService.onReserveSubmit(booking).subscribe(data => {
@@ -76,10 +75,12 @@ export class ReserveFormComponent implements OnInit {
           this.processing = true;
           this.messageClass = "alert alert-success";
           this.message = data.message;
-          // + data._id;
-          // setTimeout(() => {
-          //   this.router.navigate(['/reservation/confirm/', data._id])
-          // }, 2000);
+
+
+          setTimeout(() => {
+            //this.bookService.getReservation()
+            this.router.navigate(['/reservation/confirm/',])
+          }, 2000);
         }
       }
     )
