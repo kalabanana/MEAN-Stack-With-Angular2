@@ -5,13 +5,18 @@ import { DashboardComponent} from "./components/dashboard/dashboard.component"
 import { RegisterComponent} from "./components/register/register.component"
 import { ProfileComponent} from "./components/profile/profile.component"
 import { LoginComponent} from "./components/login/login.component"
-
+import { AuthGuard} from "./guards/auth.guard"
+import { NotAuthGuard } from "./guards/notAuth.guard"
+import { EditProfileComponent} from "./components/profile/edit-profile/edit-profile.component"
+import { ConfirmationComponent } from "./components/confirmation/confirmation/confirmation.component"
 
 const appRoutes: Routes = [
-  { path: 'dashboard', component: DashboardComponent},
-  { path: 'register', component: RegisterComponent},
-  { path: 'profile', component: ProfileComponent},
-  { path: 'login', component: LoginComponent},
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+  { path: 'register', component: RegisterComponent , canActivate: [NotAuthGuard]},
+  { path: 'profile', component: ProfileComponent , canActivate: [AuthGuard]},
+  { path: 'edit-profile/:id', component: EditProfileComponent, canActivate:[AuthGuard]},
+  { path: 'confirm/:id', component: ConfirmationComponent, canActivate:[NotAuthGuard]},
+  { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard]},
   { path: '', component:HomeComponent}, //inject home component
   { path: '**', component: HomeComponent } //any other paths
 ];
@@ -23,4 +28,5 @@ const appRoutes: Routes = [
   bootstrap: [],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }

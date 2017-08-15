@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup } from "@angular/forms"
 import { AuthService } from "../../services/auth.service"
 import { Router } from "@angular/router"
-
+import { AuthGuard } from "../../guards/auth.guard"
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,12 +13,14 @@ export class LoginComponent implements OnInit {
   message;
   processing = false;
   form: FormGroup;
+  previousUrl;
 
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private authGuard: AuthGuard,
   ) {
     this.createForm(); // Create Login Form when component is constructed
   }
@@ -68,8 +70,13 @@ export class LoginComponent implements OnInit {
           this.messageClass = 'alert alert-success'; // Set bootstrap success class
           this.message = data.message; // Set success message
           this.authService.storeOwnerData(data.token, data.owner);
+
           setTimeout(() => {
-            this.router.navigate(['/dashboard']); // Navigate to dashboard view
+            if (this.previousUrl) {
+              this.router.navigate([this.previousUrl]); // Redirect to page they were trying to view before
+            } else {
+              this.router.navigate(['/dashboard']); // Navigate to dashboard view
+            }
           }, 2000);
         }
       }
@@ -77,5 +84,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.authGuard.redirectUrl) {
+      this.messageClass = 'alert alert-danger'; // Set error message: need to login
+      this.message = 'You must be logged in to view that page.'; // Set message
+      this.previousUrl = this.authGuard.redirectUrl; // Set the previous URL user was redirected from
+      this.authGuard.redirectUrl = undefined; // Erase previous URL
+    }
   }
 }

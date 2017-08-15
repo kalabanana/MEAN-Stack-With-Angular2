@@ -1,17 +1,49 @@
-<div id="reserveForm"  class="panel panel-default">
+<div *ngIf="loading">Loading!</div>
+
+<div *ngIf="!loading" id="reserveForm"  class="panel panel-default">
+
   <div class="panel-body text-center">
     <span id="header2">Reserve a table with Crepe House now!</span>
+    <div class="row show-hide-message">
+      <div [ngClass]="messageClass">
+        {{message}}
+      </div>
+    </div>
 
-    <form class="form-inline" [formGroup]="reserveForm" (submit)="onSubmit()"><br>
+    <form class="form-inline" [formGroup]="reserveForm" (submit)="onReserveSubmit()"><br>
       <div class="form-group">
-        <label class="sr-only">Name</label>
-        <input type="text" class="form-control" name="name" id="name" placeholder="Name" formControlName="name" required>
-
-        <app-select></app-select>
-        <input type="date" name="date" id="date"  class="form-control" [min]="today" formControlName="date" required>
-        <input type="time" name="time" id="time" class="form-control" min="09:00:00" max="17:00:00" step="1800" formControlName="time" required>
-
-        <button type="submit" class="btn btn-primary">Reserve</button>
+        <div [ngClass]="{'has-error':(reserveForm.controls.name.errors && reserveForm.controls.name.dirty),
+        'has-success':!(reserveForm.controls.name.errors)}" class="form-group">
+          <input type="text" class="form-control" name="name" id="name" placeholder="Customer Name" formControlName="name" required>
+          <ul class="help-block ">
+            <li *ngIf="reserveForm.controls.name.errors?.required && reserveForm.controls.name.dirty">This field is required</li>
+          </ul>
+        </div>
+        <div [ngClass]="{'has-error':(reserveForm.controls.party.errors && reserveForm.controls.party.dirty),
+        'has-success':!(reserveForm.controls.party.errors) }" class="form-group">
+          <input type="number" class="form-control" name="party" id="party" placeholder="Party Size" formControlName="party" required>
+          <ul class="help-block ">
+            <li *ngIf="reserveForm.controls.party.errors?.required && reserveForm.controls.party.dirty">This field is required</li>
+          </ul>
+        </div>
+        <div [ngClass]="{'has-error':(reserveForm.controls.date.errors && reserveForm.controls.date.dirty),
+        'has-success':!(reserveForm.controls.date.errors) }" class="form-group">
+          <input type="datetime-local" name="date" id="date"  class="form-control" [min]="today" formControlName="date" required>
+          <ul class="help-block ">
+            <li *ngIf="reserveForm.controls.date.errors?.required && reserveForm.controls.date.dirty">This field is required</li>
+          </ul>
+        </div>
+        <!--<div [ngClass]="{'has-error':(reserveForm.controls.date.errors && reserveForm.controls.date.dirty),-->
+        <!--'has-success':!(reserveForm.controls.date.errors) }" class="form-group">-->
+          <!--<input type="time" name="time" id="time" class="form-control" min="09:00:00" max="17:00:00" step="1800" formControlName="time" required>-->
+          <!--<ul class="help-block ">-->
+            <!--<li *ngIf="reserveForm.controls.date.errors?.required && reserveForm.controls.date.dirty">This field is required</li>-->
+            <!--&lt;!&ndash;<li *ngIf="(reserveForm.controls.date.errors?.minLength || reserveForm.controls.date.errors?.maxlength) && reserveForm.controls.date.dirty" >Store hour is between 9 AM to 5 PM</li>&ndash;&gt;-->
+          <!--</ul>-->
+        <!--</div>-->
+        <div class="form-group">
+          <button [disabled]="processing || !reserveForm.valid" type="submit" class="btn btn-primary">Reserve</button>
+        </div>
       </div>
     </form>
     <br>
@@ -21,7 +53,7 @@
     <app-modal [(visible)]="showDialog">
       <h4 style="  font-family: 'Merriweather', serif;">Please enter confirmation code: </h4><br>
       <input id="confirmCode" type="text" pattern="" class="form-control"><br>
-      <button class="btn btn-primary">Submit</button>
+      <button routerLink="" class="btn btn-success">Submit</button>
       <button (click)="showDialog = !showDialog" class="btn">Close</button>
     </app-modal>
 

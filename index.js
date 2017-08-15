@@ -7,6 +7,7 @@ mongoose.Promise = global.Promise;
 const config = require ('./config/database');
 const path = require ('path');
 const authentication = require('./routes/authentication')(router);
+const reservation = require('./routes/reservation')(router);
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
@@ -39,6 +40,7 @@ app.use(express.static(__dirname + '/client/dist/'));
 
 
 app.use('/authentication', authentication);
+app.use('/reservation', reservation);
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/client/dist/index.html'));

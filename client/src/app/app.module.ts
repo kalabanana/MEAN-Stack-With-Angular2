@@ -19,8 +19,12 @@ import { LoginComponent} from "./components/login/login.component"
 import { ProfileComponent } from "./components/profile/profile.component";
 
 import { AuthService} from "./services/auth.service";
+import { BookService} from "./services/book.service";
 
-
+import { AuthGuard} from "./guards/auth.guard";
+import { NotAuthGuard} from "./guards/notAuth.guard";
+import { EditProfileComponent} from "./components/profile/edit-profile/edit-profile.component";
+import { ConfirmationComponent } from "./components/confirmation/confirmation/confirmation.component"
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +38,8 @@ import { AuthService} from "./services/auth.service";
     RegisterComponent,
     ProfileComponent,
     LoginComponent,
+    EditProfileComponent,
+    ConfirmationComponent,
 
   ],
   imports: [
@@ -43,7 +49,7 @@ import { AuthService} from "./services/auth.service";
     BrowserAnimationsModule,
     HttpModule,
   ],
-  providers: [ AuthService],
-  bootstrap: [AppComponent]
+  providers: [ AuthService, BookService, AuthGuard, NotAuthGuard],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

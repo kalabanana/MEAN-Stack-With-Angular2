@@ -44,56 +44,57 @@ module.exports = (router) => {
                                     // Check if error occured
                                     if (err) {
                                         // Check if error is an error indicating duplicate account
-                                        if (err.code === 11000) {
-                                            res.json({ success: false, message: 'Email, Username or Telephone already exist.'});
-                                        } else {
-                                            if (err.errors) {
-                                                if (err.errors.firstName) {
-                                                    res.json({success: false, message: err.errors.firstName.message});
-                                                } else {
-                                                    if (err.errors.lastName) {
-                                                        res.json({success: false, message: err.errors.lastName.message
-                                                        });
-                                                    } else {
-                                                        if(err.errors.username){
-                                                            res.json({success: false, message: err.errors.username.message});
+                                        // if (err.code === 11000) {
+                                        //     res.json({ success: false, message: 'Email or Username already exist.'});
+                                        // } else {
+                                        //     if (err.errors) {
+                                        //         if (err.errors.firstName) {
+                                        //             res.json({success: false, message: err.errors.firstName.message});
+                                        //         } else {
+                                        //             if (err.errors.lastName) {
+                                        //                 res.json({success: false, message: err.errors.lastName.message
+                                        //                 });
+                                        //             } else {
+                                        //                 if(err.errors.username){
+                                        //                     res.json({success: false, message: err.errors.username.message});
+                                        //
+                                        //                 }else {
+                                        //                     if (err.errors.password) {
+                                        //                         res.json({success: false, message: err.errors.password.message
+                                        //                         });
+                                        //                     } else {
+                                        //                         if (err.errors.email) {
+                                        //                             res.json({success: false, message: err.errors.email.message
+                                        //                             });
+                                        //                         } else {
+                                        //                             if (err.errors.telephone) {
+                                        //                                 res.json({success: false, message: err.errors.telephone.message
+                                        //                                 });
+                                        //                             } else {
+                                        //                                 res.json({success: false, message: err}); // Return any other error not already covered
+                                        //                             }
+                                        //                         }
+                                        //                     }
+                                        //                 }
+                                        //             }
+                                        //         }
+                                                res.json({success: false, message: err})
+                                                }
 
-                                                        }else {
-                                                        if (err.errors.password) {
-                                                            res.json({success: false, message: err.errors.password.message
-                                                            });
-                                                        } else {
-                                                            if (err.errors.email) {
-                                                                res.json({success: false, message: err.errors.email.message
-                                                                });
-                                                            } else {
-                                                                if (err.errors.telephone) {
-                                                                    res.json({success: false, message: err.errors.telephone.message
-                                                                    });
-                                                                } else {
-                                                                    res.json({success: false, message: err}); // Return any other error not already covered
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                                }
-                                            } else {
-                                                res.json({
-                                                    success: false,
-                                                    message: 'Could not save user. Error: ',
-                                                    err
-                                                }); // Return error if not related to validation
-                                            }
-                                        }
-                                    } else {
+                                                // else {
+                                                // res.json({ success: false, message: 'Could not save user. Error: ', err }); // Return error if not related to validation
+                                                // }
+
+                                        //}
+                                    //}
+                                    else {
                                         res.json({success: true, message: 'Account successfully registered!'}); // Return success
                                     }
                                 });
                             }
                         }
                     }
-            }
+                }
             }
         }
     });
@@ -166,35 +167,83 @@ module.exports = (router) => {
 
     //Middleware to get the decoded token
 
-    router.use((req, res, next) => {
-        const token = req.headers['authorization']; // Create token found in headers
-        if (!token) {
-            res.json({ success: false, message: 'No token provided' }); // Return error
-        } else {
-            jwt.verify(token, config.secret, (err, decoded) => {
-                if (err) {
-                    res.json({ success: false, message: 'Token invalid: ' + err }); // Return error for token validation
-                } else {
-                    req.decoded = decoded; // Create global variable to use in any request beyond
-                    next(); // Exit middleware
-                }
-            });
-        }
-    });
+    // router.use((req, res, next) => {
+    //     const token = req.headers['authorization']; // Create token found in headers
+    //     if (!token) {
+    //         res.json({ success: false, message: 'No token provided' }); // Return error
+    //     } else {
+    //         jwt.verify(token, config.secret, (err, decoded) => {
+    //             if (err) {
+    //                 res.json({ success: false, message: 'Token invalid: ' + err });
+    //             } else {
+    //                 req.decoded = decoded;
+    //                 next();
+    //             }
+    //         });
+    //     }
+    // });
 
 
     router.get('/profile', (req, res) => {
         Owner.findOne({ _id: req.decoded.ownerId }).select('username email firstName lastName telephone').exec((err, owner) => {
             if (err) {
-                res.json({ success: false, message: err }); // Return error
+                res.json({ success: false, message: err });
             } else {
                 if (!owner) {
-                    res.json({ success: false, message: 'Owner not found' }); // Return error, user was not found in db
+                    res.json({ success: false, message: 'Owner not found' });
                 } else {
-                    res.json({ success: true, owner: owner }); // Return success
+                    res.json({ success: true, owner: owner });
                 }
             }
         });
     });
+
+    // router.get('/profile/id', (req, res) => {
+    //     if(!req.params.id) {
+    //         res.json({success: false, message: 'id not provided'})
+    //     }else {
+    //         Owner.findOne({_id: req.params.ownerId}), (err, owner) => {
+    //             if (err) {
+    //                 res.json({success: false, message: 'not a valid id'});
+    //             } else {
+    //                 if (!owner) {
+    //                     res.json({success: false, message: 'Owner not found'});
+    //                 } else {
+    //                     res.json({success: true, owner: owner});
+    //                 }
+    //             }
+    //         }
+    //     }
+    // });
+
+    router.put('/updateOwner', (req, res) => {
+                console.log(req.decoded.ownerId);
+                Owner.findOne({ _id: req.decoded.ownerId },(err, owner)=>{
+                    if(err){
+                        res.json({success: false, message: err})
+                    }else {
+                        if(!owner){
+                            res.json({success: false, message: 'owner not provided'})
+                        }else {
+                            //owner.username = req.username;
+                            //owner.email = req.email;
+                            owner.password = req.password;
+                            owner.telephone = req.telephone;
+                            owner.firstName = req.firstName;
+                            owner.lastName = req.lastName;
+
+                            owner.save((err) => {
+                                if(err){
+                                    res.json({success: false, message: err})
+                                }else {
+                                    res.json({ success: true, message: 'successfully updated'})
+                                }
+                            })
+                        }
+                    }
+                })
+            }
+    );
+
     return router; // Return router object to main index.js
 }

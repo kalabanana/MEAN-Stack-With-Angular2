@@ -201,8 +201,8 @@ export class RegisterComponent implements OnInit {
         this.message = data.message;
         this.processing = true;
         setTimeout(() =>{
-          this.router.navigate(['/login'], 2000)
-        })
+          this.router.navigate(['/login'] )
+        },2000)
       }
     })
   }

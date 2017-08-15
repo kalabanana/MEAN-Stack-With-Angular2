@@ -41,13 +41,19 @@ export class AuthService {
     return this.http.get(this.domain + '/authentication/checkEmail/' + email).map(res => res.json());
   }
 
-  // updateOwner(owner){
-  //   return this.http.post(this.domain+'/authentication/updateOwner', owner).map(res=> res.json());
-  // }
-
+  updateOwner(owner){
+    console.log("try to update");
+    console.log(owner);
+    this.createAuthenticationHeaders(); // Create headers before sending to API
+    console.log("finish getting headers or token")
+    return this.http.put(this.domain+'/authentication/updateOwner/', owner, this.options).map(res => {
+      console.log("send profile to database");
+      console.log(res);
+      return res.json()});
+  }
 
   login(owner){
-    return this.http.post(this.domain + '/authentication/login', owner).map(res => res.json());
+    return this.http.post(this.domain + '/authentication/login', owner, this.options).map(res => res.json());
   }
 
 
@@ -68,6 +74,8 @@ export class AuthService {
 
   getProfile() {
     this.createAuthenticationHeaders(); // Create headers before sending to API
-    return this.http.get(this.domain + '/authentication/profile', this.options).map(res => res.json());
+    return this.http.get(this.domain + '/authentication/profile', this.options).map(res => {
+      return res.json()
+    });
   }
 }
