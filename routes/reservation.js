@@ -5,6 +5,7 @@ const config = require('../config/database');
 
 module.exports = (router) => {
 
+    //send booking data to database;
     router.post('/home', (req, res) => {
         if(!req.body.name){
             res.json({success: false, message: "You must provide a name"})

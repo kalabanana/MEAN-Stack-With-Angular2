@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 
+//creates a new schema
+
 const bookingSchema = new Schema({
     name: {type: String, required: true, lowercase: true}, //validate adds here
     party: {type: Number, required:true},

@@ -8,7 +8,7 @@ export class BookService{
 
   constructor(private http: Http) { }
 
-
+  // submits to save data
   onReserveSubmit(booking){
     return this.http.post(this.domain + '/reservation/home', booking).map(res => {
       console.log('sending data')
