@@ -33,6 +33,13 @@
             <li *ngIf="reserveForm.controls.date.errors?.required && reserveForm.controls.date.dirty">This field is required</li>
           </ul>
         </div>
+        <div [ngClass]="{'has-error':(reserveForm.controls.telephone.errors && reserveForm.controls.telephone.dirty),
+        'has-success':!(reserveForm.controls.telephone.errors) }" class="form-group">
+          <input type="telephone" name="telephone" id="telephone"  class="form-control" placeholder="Telephone" formControlName="telephone" required>
+          <ul class="help-block ">
+            <li *ngIf="reserveForm.controls.telephone.errors?.required && reserveForm.controls.telephone.dirty">This field is required</li>
+          </ul>
+        </div>
         <!--<div [ngClass]="{'has-error':(reserveForm.controls.date.errors && reserveForm.controls.date.dirty),-->
         <!--'has-success':!(reserveForm.controls.date.errors) }" class="form-group">-->
           <!--<input type="time" name="time" id="time" class="form-control" min="09:00:00" max="17:00:00" step="1800" formControlName="time" required>-->
@@ -49,7 +56,7 @@
     <br>
 
     <a (click)="showDialog = !showDialog" style="float: right; margin-right: 15%">Have a confirmation code already?</a>
-
+    <!-- 后面做！ -->
     <app-modal [(visible)]="showDialog">
       <h4 style="  font-family: 'Merriweather', serif;">Please enter confirmation code: </h4><br>
       <input id="confirmCode" type="text" pattern="" class="form-control"><br>

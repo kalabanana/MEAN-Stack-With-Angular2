@@ -1,0 +1,20 @@
+.panel{
+  margin-top: 15%;
+  padding: 20px;
+  z-index: 1;
+}
+.group{
+  float: right;
+}
+.background{
+  border-radius: 5px;
+  margin:auto;
+  width: 95%;
+  height: 700px;
+  background-image: url("../../../../assets/img/food7.jpg");
+  opacity: 1;
+}
+#code{
+  margin-left: 50%;
+  width: 100%;
+}

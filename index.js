@@ -1,11 +1,11 @@
 const express = require('express')
+const path = require ('path');
 const app = express();
 const router = express.Router();
 const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 const config = require ('./config/database');
-const path = require ('path');
 const authentication = require('./routes/authentication')(router);
 const reservation = require('./routes/reservation')(router);
 const bodyParser = require('body-parser');

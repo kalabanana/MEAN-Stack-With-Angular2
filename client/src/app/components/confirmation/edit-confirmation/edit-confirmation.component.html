@@ -1,3 +1,60 @@
-<p>
-  edit-confirmation works!
-</p>
+<div class="background">
+
+  <div class="col-md-3"></div>
+  <div class="panel panel-primary col-md-6">
+    <div class="panel-heading" style="font-family: 'Merriweather', serif">
+      <h3 class="panel-title">Edit Reservation</h3>
+    </div>
+    <div class="panel-body" style="font-family: 'Merriweather', serif">
+      <span style="font-size: 16px"><i>Thank you for reserving with The Crepe House !</i></span> <br>
+      Reservation Code is: <br>
+      <form [formGroup]="confirmForm">
+        <div id="code">
+          <strong> {{id}} </strong>
+        </div>
+        <br><br>
+        <div class="form-group" [ngClass]="{'has-error':confirmForm.controls.name.errors && confirmForm.controls.name.dirty,
+        'has-success': !confirmForm.controls.name.errors && confirmForm.controls.name.dirty}">
+          <label><i>Name:</i></label>
+          <input [disabled]="processing" type="text" placeholder="Name" formControlName="name" class="form-control" [(ngModel)]="name"/>
+          <ul class="help-block">
+            <li *ngIf="confirmForm.controls.name.error?.required && confirmForm.controls.name.dirty">This field is required</li>
+          </ul>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error':confirmForm.controls.party.errors && confirmForm.controls.party.dirty,
+        'has-success':!confirmForm.controls.party.errors && confirmForm.controls.party.dirty}">
+          <label><i>Party Size:</i></label>
+          <input [disabled]="processing" type="number" placeholder="Party Size" formControlName="party" class="form-control" maxlength="8" minlength="1" [(ngModel)]="party"/>
+          <ul class="help-block">
+            <li *ngIf="confirmForm.controls.party.error?.required && confirmForm.controls.party.dirty">This field is required</li>
+          </ul>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error':confirmForm.controls.date.errors && confirmForm.controls.date.dirty,
+        'has-success':!confirmForm.controls.date.errors && confirmForm.controls.date.dirty}">
+          <label><i>Date & Time:</i></label>
+          <input [disabled]="processing" type="datetime-local" formControlName="date" class="form-control" [(ngModel)]="date"/>
+          <ul class="help-block">
+            <li *ngIf="confirmForm.controls.date.error?.required && confirmForm.controls.date.dirty">This field is required</li>
+          </ul>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error':confirmForm.controls.telephone.errors && confirmForm.controls.telephone.dirty,
+        'has-success':!confirmForm.controls.telephone.errors && confirmForm.controls.telephone.dirty}">
+          <label><i>Telephone:</i></label>
+          <input [disabled]="processing" type="telephone" formControlName="telephone" class="form-control" [(ngModel)]="telephone"/>
+          <ul class="help-block">
+            <li *ngIf="confirmForm.controls.telephone.error?.required && confirmForm.controls.telephone.dirty">This field is required</li>
+          </ul>
+        </div>
+      </form>
+      <span style="color: #777777;font-size: 10px; display: block; float: right">* Please arrive with full party in order to be seated.</span>
+    </div>
+
+
+    <div class="group">
+      <button type="submit" [routerLink]="['/edit-confirm/',id]" [disabled]="!confirmForm.valid || processing" class="btn btn-success">Save</button>
+      <button type="button" [disabled]="processing" class="btn btn-primary" (click)="goBack()">Back</button>
+      <button type="button" [routerLink]="['/delete-confirm',id]" [disabled]="processing" class="btn btn-danger">Remove</button>
+    </div>
+  </div>
+  <div class="col-md-3"></div>
+</div>

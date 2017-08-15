@@ -7,21 +7,23 @@
       </div>
       <div class="panel-body" style="font-family: 'Merriweather', serif">
         <span style="font-size: 16px"><i>Thank you for reserving with The Crepe House !</i></span> <br>
-        Reservation Code is: <br>
+        Reservation Code is: <br><br>
         <div id="code">
           <strong> {{id}} </strong>
         </div>
-        <br><br>
-        <i>Name:</i> <strong>   {{name}}</strong><br>
-        <i>Party Size:</i>   <strong> {{party}}</strong><br>
-        <i>Time & Date:</i>   <strong> {{date}}</strong> <br>
-        <span style="color: #777777;font-size: 10px; display: block; float: right">* Please arrive with full party in order to be seated.</span>
-    </div>
+        <br>
+        <i>Name:</i><strong>   {{name}} </strong><br>
+        <i>Party Size:</i><strong>   {{party}} </strong><br>
+        <i>Time & Date:</i><strong>   {{date}} </strong> <br>
+        <i>Telephone:</i><strong>   {{telephone}} </strong> <br>
 
+      </div>
 
     <div class="group">
-      <button class="btn btn-primary">Edit Reservation</button>
-      <a style="font-size: 13px">Remove</a>
+      <button [routerLink]="['/edit-confirm/',id]" class="btn btn-primary">Edit Reservation</button>
+      <a [routerLink]="['/delete-confirm',id]" style="font-size: 13px">Remove</a><br>
+      <span style="color: #777777;font-size: 10px; display: block; float: right">* Please arrive with full party in order to be seated.</span>
+
     </div>
   </div>
   <div class="col-md-3"></div>

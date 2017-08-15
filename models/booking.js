@@ -8,6 +8,7 @@ const bookingSchema = new Schema({
     name: {type: String, required: true, lowercase: true}, //validate adds here
     party: {type: Number, required:true},
     date: {type: Date, required: true},
+    telephone:{type: String, required: true},
     startTime:{type: Number},
     endTime:{type: Number},
     tableId:{type: Number},

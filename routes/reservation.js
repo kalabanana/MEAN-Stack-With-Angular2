@@ -13,31 +13,35 @@ module.exports = (router) => {
             }else {
                 if(!req.body.date){
                     res.json({success: false, message:"You must provide a date"})
-                }else{
-                    let booking = new Book({
-                        name: req.body.name.toLowerCase(),
-                        party: req.body.party.toString(),
-                        date: req.body.date,
-                        startTime: (new Date(req.body.date).getTime()),
-                        endTime: (new Date(req.body.date).getTime()) + 3600*1000,
-                        tableId: Math.floor(Math.random() * 20 + 1),
-                    });
-                    console.log(booking);
-                    booking.save((err)=>{
-                        if(err){
-                            res.json({success: false, message: err})
-                        }else {
-                            res.json({success: true, message: "Successfully booked a table with us!"})
-                        }
-                    })
+                }else {
+                    if (!req.body.telephone) {
+                        res.json({success: false, message: "You must provide a telephone"})
+                    } else {
+                        let booking = new Book({
+                            name: req.body.name.toLowerCase(),
+                            party: req.body.party.toString(),
+                            date: req.body.date,
+                            telephone: req.body.telephone,
+                            startTime: (new Date(req.body.date).getTime()),
+                            endTime: (new Date(req.body.date).getTime()) + 3600 * 1000,
+                            tableId: Math.floor(Math.random() * 20 + 1),
+                        });
+                        booking.save((err, req) => {
+                            if (err) {
+                                res.json({success: false, message: err})
+                            } else {
+                                id: req._id;
+                                res.json({success: true, message: "Successfully booked a table with us! Redirecting now!", id: req._id})
+                            }
+                        });
 
+                    }
                 }
             }
         }
     });
 
     // 下面是okay
-
     router.get('/confirm/:id', (req, res) => {
         if (!req.params.id) {
             res.json({ success: false, message: 'No ID was provided.' });

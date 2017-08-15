@@ -26,6 +26,8 @@ export class ReserveFormComponent implements OnInit {
       ])],
       date: ['', Validators.compose([
         Validators.required])],
+      telephone: ['', Validators.compose([
+        Validators.required])],
       // time: ['', Validators.compose([
       //   Validators.required])],
 
@@ -48,12 +50,16 @@ export class ReserveFormComponent implements OnInit {
     this.reserveForm.controls['name'].disable();
     this.reserveForm.controls['party'].disable();
     this.reserveForm.controls['date'].disable();
+    this.reserveForm.controls['telephone'].disable();
+
   }
 
   enableForm() {
     this.reserveForm.controls['name'].enable();
     this.reserveForm.controls['party'].enable();
     this.reserveForm.controls['date'].enable();
+    this.reserveForm.controls['telephone'].enable();
+
   }
 
   onReserveSubmit() {
@@ -63,6 +69,7 @@ export class ReserveFormComponent implements OnInit {
       name: this.reserveForm.get('name').value,
       party: this.reserveForm.get('party').value,
       date: this.reserveForm.get('date').value,
+      telephone: this.reserveForm.get('telephone').value
     }
 
     this.bookService.onReserveSubmit(booking).subscribe(data => {
@@ -71,16 +78,15 @@ export class ReserveFormComponent implements OnInit {
           this.messageClass = "alert alert-danger";
           this.message = data.message;
         } else {
-          this.enableForm();
           this.processing = true;
           this.messageClass = "alert alert-success";
           this.message = data.message;
-
+          this.enableForm();
+          console.log(data)
 
           setTimeout(() => {
-            //this.bookService.getReservation()
-            this.router.navigate(['/reservation/confirm/',])
-          }, 2000);
+            this.router.navigate(['/confirmCode',data.id])
+          }, 1000);
         }
       }
     )

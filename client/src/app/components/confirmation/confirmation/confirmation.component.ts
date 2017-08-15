@@ -14,6 +14,7 @@ export class ConfirmationComponent implements OnInit {
   party;
   date;
   id;
+  telephone;
   currentUrl;
 
   message
@@ -35,6 +36,7 @@ export class ConfirmationComponent implements OnInit {
         this.party = data.booking.party;
         this.date = data.booking.date;
         this.id = data.booking._id;
+        this.telephone = data.booking.telephone;
         this.loading = false;
       }
     });

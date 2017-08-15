@@ -4,14 +4,14 @@ import { ReactiveFormsModule} from "@angular/forms"
 import { NgModule } from '@angular/core';
 import { AppRoutingModule} from "./app-routing.module";
 import { HttpModule} from "@angular/http"
-
+import { FormsModule} from "@angular/forms"
 
 import { AppComponent } from './app.component';
 import { NavbarComponent} from "./components/navbar/navbar.component";
 import { HomeComponent} from "./components/home/home.component";
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SelectComponent } from './components/select/select.component';
-import { EntercodeComponent } from './components/confirmation/modal/modal.component';
+import { EntercodeComponent } from './components/modal/modal.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ReserveFormComponent } from './components/reserve-form/reserve-form.component';
 import { RegisterComponent} from "./components/register/register.component";
@@ -54,6 +54,7 @@ import { NotAuthGuard} from "./guards/notAuth.guard";
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpModule,
+    FormsModule
   ],
   providers: [ AuthService, BookService, AuthGuard, NotAuthGuard],
   bootstrap: [ AppComponent ]

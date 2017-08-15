@@ -33,7 +33,6 @@ export class BookService{
     this.authToken = token;
   }
 
-  //有问题！！
   getReservation(id){
     return this.http.get(this.domain + '/reservation/confirm/' + id).map(res => {
       console.log('getting data')

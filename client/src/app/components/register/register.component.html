@@ -15,7 +15,6 @@
           <input type="text" id="firstName" name="firstName" class="form-control" placeholder="First Name" autocomplete="off" formControlName="firstName" required/>
           <ul class="help-block ">
             <li *ngIf="registerForm.controls.firstName.errors?.required && registerForm.controls.firstName.dirty">This field is required</li>
-            <!--if the field is defined with the question mark -->
             <li *ngIf="(registerForm.controls.firstName.errors?.minlength || registerForm.controls.firstName.errors?.maxlength) && registerForm.controls.firstName.dirty">Minimum characters: 3, Maximum characters: 30</li>
           <li *ngIf="registerForm.controls.firstName.errors?.validateFirstName && registerForm.controls.firstName.dirty ">Must provide a valid First Name</li>
           </ul>
