@@ -1,0 +1,14 @@
+<app-modal [(visible)]="showDialog" *ngIf="booking">
+  <h4 style="  font-family: 'Merriweather', serif;">Are you sure you would like to delete reservation? </h4><br>
+  <label>Confirmation Code: </label> <strong>{{booking.id}}</strong>
+  <br>
+  <label>Name: </label> <strong>{{booking.name}}</strong>
+  <br>
+  <label>Date & Time: </label> <strong>{{booking.date | date: 'medium'}}</strong>
+  <br>
+  <button (click)="deleteReservation()" class="btn btn-danger">Delete</button>
+  <button (click)="close()" class="btn">Close</button>
+</app-modal>
+<flash-messages></flash-messages>
+<app-booking-list></app-booking-list>
+

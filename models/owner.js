@@ -211,12 +211,16 @@ const passwordValidators = [
 //model definition
 
 const ownerSchema = new Schema({
-    firstName: {type: String, required: true, lowercase: true}, //validate adds here
-    lastName: {type: String, required: true, lowercase: true},
-    username: {type: String, required:true, lowercase:true},
-    password:{type: String, required:true},
-    email: {type: String, required:true, lowercase:true},
-    telephone:{type: String, required:true},
+    firstName: {type: String, lowercase: true, firstNameValidators},
+    lastName: {type: String, lowercase: true, lastNameValidators},
+    username: {type: String, lowercase:true, usernameValidators},
+    password:{type: String, passwordValidators},
+    email: {type: String, lowercase:true, emailValidators},
+    telephone:{type: String,telephoneValidators},
+    street:{type: String},
+    city:{type:String},
+    state:{type:String},
+    zip:{type:String},
 });
 
 ownerSchema.pre('save', function(next) {

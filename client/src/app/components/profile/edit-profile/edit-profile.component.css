@@ -60,21 +60,48 @@ input::-webkit-input-placeholder {
   margin-top: 5px;
   font-size: 15px;
 }
-.col-md-6 table{
-  font-family: 'Merriweather', serif;
-}
 
-#code{
-  display: none;
-}
+
 .panel-heading{
-  background-color: rgba(63,147,192,0.48) ;
+  background-color: rgba(26,64,123,0.67) ;
+  color: white;
 }
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
   padding: 15px;
 }
+
+.table-user-information > tbody > tr {
+  border-top: 1px solid rgb(221, 221, 221);
+  width: 100px;
+  overflow: scroll;
+}
+
+.table-user-information > tbody > tr:first-child {
+  border-top: 0;
+}
+
+.table-user-information > tbody > tr > td {
+  border-top: 0;
+}
+.table-user-information[_ngcontent-c8]    > tbody[_ngcontent-c8]    > tr[_ngcontent-c8]    > td[_ngcontent-c8]{
+  width: 100px;
+}
+.toppad {
+  margin-top:20px;
+}
 hr{
-  width: 40%;
+  width: 90%;
   margin: auto;
+  color: #40586a;
+}
+.table{
+  display: flex;
+}
+.update-button{
+  width: 60px;
+}
+#btnG{
+  width: 50%;
+  clear: both;
 }
 

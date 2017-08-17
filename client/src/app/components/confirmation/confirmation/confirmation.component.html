@@ -6,22 +6,28 @@
         <h3 class="panel-title">The Crepe House Presents</h3>
       </div>
       <div class="panel-body" style="font-family: 'Merriweather', serif">
+        <div class="row show-hide-message">
+          <div [ngClass]="messageClass">
+            {{message}}
+          </div>
+        </div>
+        <br>
         <span style="font-size: 16px"><i>Thank you for reserving with The Crepe House !</i></span> <br>
         Reservation Code is: <br><br>
         <div id="code">
-          <strong> {{id}} </strong>
+          <strong style="font-size: 20px"> {{id}} </strong>
         </div>
         <br>
         <i>Name:</i><strong>   {{name}} </strong><br>
         <i>Party Size:</i><strong>   {{party}} </strong><br>
-        <i>Time & Date:</i><strong>   {{date}} </strong> <br>
+        <i>Time & Date:</i><strong>   {{date | date: 'medium'}} </strong> <br>
         <i>Telephone:</i><strong>   {{telephone}} </strong> <br>
 
       </div>
 
     <div class="group">
       <button [routerLink]="['/edit-confirm/',id]" class="btn btn-primary">Edit Reservation</button>
-      <a [routerLink]="['/delete-confirm',id]" style="font-size: 13px">Remove</a><br>
+      <a [routerLink]="['/delete-confirm/',id]" style="font-size: 13px">Remove</a><br>
       <span style="color: #777777;font-size: 10px; display: block; float: right">* Please arrive with full party in order to be seated.</span>
 
     </div>

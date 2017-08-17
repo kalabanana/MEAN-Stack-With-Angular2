@@ -1,174 +1,164 @@
-<h1 class="page-header" style="font-family:'Merriweather', serif;">Update Owner Profile</h1>
+<h1 class="page-header" style="  font-family: 'Merriweather', serif;">Update Profile</h1>
+<div class="col-md-2"></div>
+<div class="container" class="col-md-8" style="background-color: rgba(17,43,69,0.18); padding-top:20px">
+  <div class="row show-hide-message">
+    <div [ngClass]="messageClass">
+      {{message}}
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" >
+      <h3 class="panel-title" style="  font-family: 'Merriweather', serif;">Update My Information</h3>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div align="center">
+          <img src="../../../assets/img/logo.png" height="20%" width="20%" style="border-radius: 140px"/></div>
+        <div>
+          <br>
+          <div *ngIf="!owner">Loading</div>
 
-<div class="container background">
-  <div class="row main">
-    <div class="main-login main-center">
-      <div *ngIf="!loading"> Loading </div>
-      <div  *ngIf="loading">
-        <form [formGroup]="profileForm" class="form-horizontal" (submit)="onUpdateSubmit()">
+          <form class="form-group" *ngIf="owner" [formGroup]="profileForm" (submit)="onUpdateSubmit()">
+            <table class="table table-user-information" >
+              <div class="table table-user-information">
+                <tbody>
+                <tr>
+                  <td>Username:</td>
+                  <td>
+                    <div class="form-group">
+                      <div [ngClass]="{'has-error':(profileForm.controls.username.errors && profileForm.controls.username.dirty),
+'has-success':!(profileForm.controls.username.errors)}" class="input-group">
+                        <input type="text" class="form-control" name="username" id="username"  placeholder="Username" value="{{username}}" formControlName="username" />
+                        <ul class="help-block">
+                          <li *ngIf="profileForm.controls.username.errors?.required && profileForm.controls.username.dirty">This field is required</li>
+                          <li *ngIf="(profileForm.controls.username.errors?.minlength || profileForm.controls.username.errors?.maxlength) && profileForm.controls.username.dirty">Minimum characters: 5, Maximum characters: 12</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
 
-          <!--<div class="form-group in">-->
-          <!--<div class="cols-sm-10" >-->
-          <!--<div [ngClass]="{'has-error':(profileForm.controls.email.errors && profileForm.controls.email.dirty) || (!emailValid && profileForm.controls.email.dirty),-->
-          <!--'has-success':!profileForm.controls.email.errors && emailValid }">-->
-          <!--<label for="email"class="cols-sm-2 control-label">Email</label>-->
-          <!--<span class="input-group-addon"><i class="fa fa-email fa" aria-hidden="true"></i></span>-->
-          <!--<input type="email" id="email" name="email" class="form-control" placeholder="Email" autocomplete="off" formControlName="email" value="{{email}}" required/>-->
-          <!--</div>-->
-          <!--<ul class="help-block">-->
-          <!--<li *ngIf="profileForm.controls.email.errors?.required && profileForm.controls.email.dirty">This field is required</li>-->
-          <!--<li *ngIf="(profileForm.controls.email.errors?.minlength || profileForm.controls.email.errors?.maxlength) && profileForm.controls.email.dirty">Minimum characters: 5, Maximum characters: 30</li>-->
-          <!--<li *ngIf="profileForm.controls.email.errors?.validateEmail && profileForm.controls.email.dirty ">Must provide a valid Email</li>-->
-          <!--</ul>-->
-          <!--</div>-->
-          <!--</div>-->
 
-          <!--<div class="form-group in">-->
-          <!--<label for="username" class="cols-sm-2 control-label">Username</label>-->
-          <!--<div class="cols-sm-10" >-->
-          <!--<div [ngClass]="{'has-error':(profileForm.controls.username.errors && profileForm.controls.username.dirty) || (!usernameValid && profileForm.controls.username.dirty),-->
-          <!--'has-success':!profileForm.controls.username.errors && emailValid }">-->
-          <!--<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>-->
-          <!--<input type="text" id="username" name="username" class="form-control" placeholder="Username" autocomplete="off" formControlName="username" value="{{username}}" required/>-->
-          <!--</div>-->
-          <!--<ul class="help-block">-->
-          <!--<li *ngIf="profileForm.controls.username.errors?.required && profileForm.controls.username.dirty">This field is required</li>-->
-          <!--<li *ngIf="(profileForm.controls.username.errors?.minlength || profileForm.controls.username.errors?.maxlength) && profileForm.controls.username.dirty">Minimum characters: 5, Maximum characters: 12</li>-->
-          <!--<li *ngIf="profileForm.controls.username.errors?.validateUsername && profileForm.controls.username.dirty ">Must provide a valid Username and no special characters</li>-->
-          <!--</ul>-->
-          <!--</div>-->
-          <!--</div>-->
+                <tr>
+                  <td>First Name:</td>
+                  <td><div class="form-group">
+                    <div [ngClass]="{'has-error':(profileForm.controls.firstName.errors && profileForm.controls.firstName.dirty),
+'has-success':!(profileForm.controls.firstName.errors)}" class="input-group">
+                      <input type="text" class="form-control" name="firstName"  placeholder="First Name" value="{{firstName}}" formControlName="firstName" />
+                      <ul class="help-block">
+                        <li *ngIf="profileForm.controls.firstName.errors?.required && profileForm.controls.firstName.dirty">This field is required</li>
+                        <li *ngIf="(profileForm.controls.firstName.errors?.minlength || profileForm.controls.firstName.errors?.maxlength) && profileForm.controls.firstName.dirty">Minimum characters: 3, Maximum characters: 30</li>
+                        <li *ngIf="profileForm.controls.firstName.errors?.validateFirstName && profileForm.controls.firstName.dirty ">Must provide a valid First Name</li>
+                      </ul>
+                    </div>
+                  </div>
+                  </td>
+                </tr>
 
-          <div class="form-group">
-            <label for="username" class="cols-sm-2 control-label">Username</label>
-            <div class="cols-sm-10" >
-              <div [ngClass]="{'has-error':(profileForm.controls.username.errors && profileForm.controls.username.dirty) || (!usernameValid && profileForm.controls.username.dirty),
-        'has-success':!profileForm.controls.username.errors && usernameValid }" class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                <input type="text" class="form-control" name="username" id="username"  placeholder="Username" value="{{username}}" formControlName="username" />
+
+                <tr>
+                  <td>Last Name:</td>
+                  <td>
+                    <div>
+                      <div class="form-group">
+                        <div [ngClass]="{'has-error':(profileForm.controls.lastName.errors && profileForm.controls.lastName.dirty),
+'has-success':!(profileForm.controls.lastName.errors)}" class="input-group">
+                          <input type="text" class="form-control" name="lastName" id="lastName"  placeholder="Last Name" value="{{lastName}}" formControlName="lastName" />
+                          <ul class="help-block">
+                            <li *ngIf="profileForm.controls.lastName.errors?.required && profileForm.controls.lastName.dirty">This field is required</li>
+                            <li *ngIf="(profileForm.controls.lastName.errors?.minlength || profileForm.controls.lastName.errors?.maxlength) && profileForm.controls.lastName.dirty">Minimum characters: 3, Maximum characters: 30</li>
+                            <li *ngIf="profileForm.controls.lastName.errors?.validateLastName && profileForm.controls.lastName.dirty ">Must provide a valid Last Name</li>
+                          </ul>
+
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+
+                </tr>
+
+
+                <tr>
+                  <td>Telephone:</td>
+                  <td>
+                    <div class="form-group">
+                      <div class="input-group" [ngClass]="{'has-error':(profileForm.controls.telephone.errors && profileForm.controls.telephone.dirty),
+'has-success':!(profileForm.controls.telephone.errors) }">
+                        <input type="text" class="form-control" name="telephone" id="telephone"  placeholder="Telephone" value="{{telephone}}" formControlName="telephone" />
+                        <ul class="help-block">
+                          <li *ngIf="profileForm.controls.telephone.errors?.required && profileForm.controls.telephone.dirty">This field is required</li>
+                          <li *ngIf="profileForm.controls.telephone.errors?.validatePhone && profileForm.controls.telephone.dirty ">Must provide a valid Telephone Number</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
               </div>
-              <ul class="help-block">
-                <li *ngIf="profileForm.controls.username.errors?.required && profileForm.controls.username.dirty">This field is required</li>
-                <li *ngIf="(profileForm.controls.username.errors?.minlength || profileForm.controls.username.errors?.maxlength) && profileForm.controls.username.dirty">Minimum characters: 5, Maximum characters: 12</li>
-                <li *ngIf="profileForm.controls.username.errors?.validateUsername && profileForm.controls.username.dirty ">Must provide a valid Username and no special characters</li>
-              </ul>
-            </div>
-          </div>
 
-          <div class="form-group">
-            <label for="email" class="cols-sm-2 control-label">Email</label>
-            <div class="cols-sm-10" >
-              <div [ngClass]="{'has-error':(profileForm.controls.email.errors && profileForm.controls.email.dirty) || (!emailValid && profileForm.controls.email.dirty),
-        'has-success':!profileForm.controls.email.errors && emailValid }" class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                <input type="text" class="form-control" name="email" id="email"  placeholder="Email" value="{{email}}" formControlName="email" />
+
+
+
+              <div class="table table-user-information">
+                <tr>
+                  <td>Street:</td>
+                  <td>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <input type="text" class="form-control" name="street" id="street"  placeholder="Street" value="{{street}}" formControlName="street" />
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+
+
+
+                <tr>
+                  <td>City:</td>
+                  <td>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <input type="text" class="form-control" name="city" id="city"  placeholder="City" value="{{city}}" formControlName="city" />
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+
+
+                <tr>
+                  <td>State:</td>
+                  <td>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <input type="text" class="form-control" name="state" id="state"  placeholder="State" value="{{state}}" formControlName="state" />
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>ZIP:</td>
+                  <td>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <input type="text" class="form-control" name="zip" id="zip"  placeholder="ZIP code" value="{{zip}}" formControlName="zip" />
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+
+                </tbody>
               </div>
-              <ul class="help-block">
-                <li *ngIf="profileForm.controls.email.errors?.required && profileForm.controls.email.dirty">This field is required</li>
-                <li *ngIf="(profileForm.controls.email.errors?.minlength || profileForm.controls.email.errors?.maxlength) && profileForm.controls.email.dirty">Minimum characters: 5, Maximum characters: 30</li>
-                <li *ngIf="profileForm.controls.email.errors?.validateEmail && profileForm.controls.email.dirty ">Must provide a valid Email</li>
-              </ul>
-            </div>
-          </div>
+            </table>
 
-          <div class="form-group">
-            <label for="firstName" class="cols-sm-2 control-label">First Name</label>
-            <div class="cols-sm-10" >
-              <div [ngClass]="{'has-error':(profileForm.controls.firstName.errors && profileForm.controls.firstName.dirty),
-        'has-success':!profileForm.controls.firstName.errors}" class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                <input type="text" class="form-control" name="firstName" id="firstName"  placeholder="First Name" value="{{firstName}}" formControlName="firstName" />
-              </div>
-              <ul class="help-block">
-                <li *ngIf="profileForm.controls.firstName.errors?.required && profileForm.controls.firstName.dirty">This field is required</li>
-                <li *ngIf="(profileForm.controls.firstName.errors?.minlength || profileForm.controls.firstName.errors?.maxlength) && profileForm.controls.firstName.dirty">Minimum characters: 3, Maximum characters: 30</li>
-                <li *ngIf="profileForm.controls.firstName.errors?.validateFirstName && profileForm.controls.firstName.dirty ">Must provide a valid First Name</li>
-              </ul>
-            </div>
-          </div>
-
-          <div>
             <div class="form-group">
-              <label for="lastName" class="cols-sm-2 control-label">Last Name</label>
-              <div class="cols-sm-10">
-                <div [ngClass]="{'has-error':(profileForm.controls.lastName.errors && profileForm.controls.lastName.dirty),
-        'has-success':!(profileForm.controls.lastName.errors)}" class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                  <input type="text" class="form-control" name="lastName" id="lastName"  placeholder="Last Name" value="{{lastName}}" formControlName="lastName" />
-                </div>
-              </div>
-              <ul class="help-block">
-                <li *ngIf="profileForm.controls.lastName.errors?.required && profileForm.controls.lastName.dirty">This field is required</li>
-                <li *ngIf="(profileForm.controls.lastName.errors?.minlength || profileForm.controls.lastName.errors?.maxlength) && profileForm.controls.lastName.dirty">Minimum characters: 3, Maximum characters: 30</li>
-                <li *ngIf="profileForm.controls.lastName.errors?.validateLastName && profileForm.controls.lastName.dirty ">Must provide a valid Last Name</li>
-              </ul>
+              <input class="btn btn-success btn-lg btn-block update-button" type="submit" value="Update"/>
             </div>
-          </div>
-
-
-          <div class="form-group">
-
-            <label for="telephone" class="cols-sm-2 control-label">Telephone</label>
-            <div class="cols-sm-10">
-              <div class="input-group" [ngClass]="{'has-error':(profileForm.controls.telephone.errors && profileForm.controls.telephone.dirty),
-        'has-success':!(profileForm.controls.telephone.errors) }">
-                <span class="input-group-addon"><i class="fa fa-phone fa" aria-hidden="true"></i></span>
-                <input type="text" class="form-control" name="telephone" id="telephone"  placeholder="Telephone" value="{{telephone}}" formControlName="telephone" />
-              </div>
-              <ul class="help-block">
-                <li *ngIf="profileForm.controls.telephone.errors?.required && profileForm.controls.telephone.dirty">This field is required</li>
-                <li *ngIf="profileForm.controls.telephone.errors?.validatePhone && profileForm.controls.telephone.dirty ">Must provide a valid Telephone Number</li>
-              </ul>
-            </div>
-          </div>
-
-
-          <div class="form-group">
-            <span style="font-size:10px; font-family: 'Merriweather', serif; color: red"> * Please re-enter your password or enter a new password </span>
-            <br>
-            <label for="password" class="cols-sm-2 control-label">Password</label>
-            <div class="cols-sm-10">
-              <div class="input-group" [ngClass]="{'has-error':(profileForm.controls.password.errors && profileForm.controls.password.dirty),
-        'has-success':!profileForm.controls.password.errors}">
-                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                <input type="password" class="form-control" name="password" id="password" data-toggle="popover" placeholder="New password" formControlName="password" />
-              </div>
-            </div>
-            <ul class="help-block">
-              <li *ngIf="profileForm.controls.password.errors?.required && profileForm.controls.password.dirty">This field is required</li>
-              <li *ngIf="(profileForm.controls.password.errors?.minlength || profileForm.controls.password.errors?.maxlength) && profileForm.controls.password.dirty">Minimum characters: 3, Maximum characters: 30</li>
-              <li *ngIf="profileForm.controls.password.errors?.validatePassword && profileForm.controls.password.dirty ">Must have at least one uppercase, lowercase, special character, and number</li>
-            </ul>
-          </div>
-
-          <div class="form-group">
-            <label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
-            <div class="cols-sm-10">
-              <div class="input-group" [ngClass]="{'has-error':(profileForm.controls.confirm.errors && profileForm.controls.confirm.dirty) ||
-       (profileForm.errors?.matchingPasswords && profileForm.controls.confirm.dirty),
-        'has-success':!(profileForm.controls.confirm.errors) && !(profileForm.errors?.matchingPasswords)}">
-                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                <input type="password" class="form-control" name="confirm" id="confirm" data-toggle="popover" placeholder="Confirm password" formControlName="confirm" />
-              </div>
-              <ul class="help-block">
-                <li *ngIf="profileForm.controls.confirm.errors?.required && profileForm.controls.confirm.dirty">This field is required</li>
-                <li *ngIf="profileForm.errors?.matchingPasswords">Passwords do not match</li>
-              </ul>
-            </div>
-          </div>
-
-          <!--<div id="code" class="form-group">-->
-          <!--<label for="franCode">Franchise Code</label>-->
-          <!--<div class="cols-sm-10">-->
-          <!--<input disabled="true" type="text" id="franCode" name="franCode" class="form-control" autocomplete="off" value="Qx76Sk562sgdfr"/>-->
-          <!--</div>-->
-          <!--</div>-->
-
-          <div class="form-group ">
-            <input [disabled]="!profileForm.valid || processing" class="btn btn-success btn-lg btn-block update-button" type="submit" value="Update"/>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<div class="col-md-2"></div>
+

@@ -9,7 +9,7 @@ import { Router } from "@angular/router"
   styleUrls: ['./reserve-form.component.css']
 })
 export class ReserveFormComponent implements OnInit {
-  reserveForm: FormGroup;
+  reserveForm;
   showDialog = false;
   processing = false;
 
@@ -82,7 +82,7 @@ export class ReserveFormComponent implements OnInit {
           this.messageClass = "alert alert-success";
           this.message = data.message;
           this.enableForm();
-          console.log(data)
+          console.log(data);
 
           setTimeout(() => {
             this.router.navigate(['/confirmCode',data.id])

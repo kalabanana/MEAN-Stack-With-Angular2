@@ -11,7 +11,7 @@ import { Location } from "@angular/common"
 })
 export class EditConfirmationComponent implements OnInit {
 
-  confirmForm: FormGroup;
+  confirmForm;
   booking;
   name;
   party;
@@ -29,6 +29,7 @@ export class EditConfirmationComponent implements OnInit {
   constructor(private bookService : BookService,
               private activatedRoute: ActivatedRoute,
               private formBuilder: FormBuilder,
+              private router: Router,
               private location: Location) {
 
   }
@@ -41,8 +42,22 @@ export class EditConfirmationComponent implements OnInit {
 
     })
   }
-  updateReservation(){
+
+  updateEditSubmit(){
     this.processing = true;
+    this.bookService.editConfirmation(this.booking).subscribe(data => {
+      if(!data.success){
+        this.messageClass = "alert alert-danger";
+        this.message = data.message;
+        this.processing = false;
+      }else {
+        this.messageClass = "alert alert-success";
+        this.message = data.message;
+        setTimeout(() => {
+          this.router.navigate(['/confirmCode',this.id])
+        },1000)
+      }
+    })
 
   }
 
@@ -54,16 +69,13 @@ export class EditConfirmationComponent implements OnInit {
         this.message = 'confirmation code not found.';
       } else {
         this.booking = data.booking;
-        this.name = data.booking.name;
-        this.party = data.booking.party;
-        this.date = data.booking.date;
         this.id = data.booking._id;
-        this.telephone = data.booking.telephone;
         this.processing = false;
         this.loading = false;
       }
     });
     this.createForm();
+    this.loading = false;
   }
 
   goBack(){

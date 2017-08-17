@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators} from "@angular/forms"
 import { AuthService} from "../../services/auth.service"
-import { Router } from "@angular/router"
+import { ActivatedRoute, Router } from "@angular/router"
 
 @Component({
   selector: 'app-profile',
@@ -16,21 +15,34 @@ export class ProfileComponent implements OnInit {
   lastName;
   telephone;
   owner;
-
+  street;
+  city;
+  state;
+  zip;
+  loading = true;
 
   constructor(
-    private authService: AuthService,) {
+    private authService: AuthService) {
   }
 
   ngOnInit() {
     this.authService.getProfile().subscribe(profile => {
-      this.username = profile.owner.username; // Set username
-      this.email = profile.owner.email; // Set e-mail
-      this.firstName = profile.owner.firstName;
-      this.lastName = profile.owner.lastName;
-      this.telephone = profile.owner.telephone;
-      this.owner = profile.owner;
-      //console.log(profile);
+      if(!profile.success){
+        this.loading = true;
+        this.owner = null;
+      }else {
+        this.loading = false;
+        this.owner = profile.owner;
+        this.email = profile.owner.email;
+        this.username = profile.owner.username;
+        this.firstName = profile.owner.firstName;
+        this.lastName = profile.owner.lastName;
+        this.telephone = profile.owner.telephone;
+        this.street = profile.owner.street;
+        this.city = profile.owner.city;
+        this.state = profile.owner.state;
+        this.zip = profile.owner.zip;
+      }
     });
   }
 

@@ -1,5 +1,4 @@
 const Book = require('../models/booking');
-const config = require('../config/database');
 
 module.exports = (router) => {
 
@@ -30,8 +29,8 @@ module.exports = (router) => {
                             if (err) {
                                 res.json({success: false, message: err})
                             } else {
-                                id: req._id;
-                                res.json({success: true, message: "Successfully booked a table with us! Redirecting now!", id: req._id})
+                                console.log(req);
+                                res.json({success: true, message: "Successfully booked a table with us! Redirecting now!",id: req._id })
                             }
                         });
 
@@ -59,6 +58,81 @@ module.exports = (router) => {
             });
         }
     });
+
+
+    router.get('/allReservations', (req, res) => {
+        Book.find({}, (err, bookings)=>{
+            if(err){
+                res.json({success: false, message: err})
+            }else {
+                if(!bookings){
+                    res.json({success: false, message: 'No bookings are found!'})
+                }else {
+                    res.json({success: true, bookings: bookings})
+                }
+            }
+        }).sort({'name': 1}) //-1 descending order
+    })
+
+
+    //ok!!
+    router.put('/updateReservation', (req, res)=> {
+        if(!req.body._id){
+            res.json({ success: false, message: 'No ID was provided'})
+        }else {
+            Book.findOne({ _id: req.body._id}, (err, booking) =>{
+                if(err){
+                    res.json({ success: false, message: err})
+                }else {
+                    if(!booking){
+                        res.json({ success: false, message: 'Confirmation Code was not found!'})
+                    }else {
+                        booking.username = req.body.username;
+                        booking.name = req.body.name;
+                        booking.party = req.body.party;
+                        booking.date = req.body.date;
+                        booking.telephone = req.body.telephone;
+
+                        booking.save((err) => {
+                            if(err){
+                                res.json({ success: false, message: err})
+                            } else {
+                                res.json({ success: true, message: "Successfully updated your reservation!"})
+                            }
+                        })
+                    }
+                }
+            })
+        }
+    });
+
+
+//ok
+    router.delete('/remove-confirm/:id', (req,res) =>{
+        if(!req.params.id){
+            res.json({ success:false, message: 'ID was not provided'})
+        }else {
+            Book.findOne({ _id : req.params.id}, (err, booking)=> {
+                if(err){
+                    res.json({ success:false, message: err})
+                }else {
+                    if(!booking){
+                        res.json({ success: false, message: 'Confirmation code was not found'})
+                    }else {
+                        booking.remove((err) => {
+                            if(err){
+                                res.json({success:false, message: err })
+                            }else {
+                                res.json({success: true, message: "Successfully removed reservation!"})
+                            }
+                        })
+                    }
+                }
+            })
+        }
+
+    });
+
     return router;
 
 }

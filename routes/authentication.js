@@ -2,8 +2,6 @@ const Owner = require('../models/owner');
 const jwt = require('jsonwebtoken'); // Compact, URL-safe means of representing claims to be transferred between two parties.
 const config = require('../config/database')
 
-//in database
-
 module.exports = (router) => {
     //register route to register
     router.post('/register', (req, res) => {
@@ -43,50 +41,50 @@ module.exports = (router) => {
                                 owner.save((err) => {
                                     // Check if error occured
                                     if (err) {
-                                        // Check if error is an error indicating duplicate account
-                                        // if (err.code === 11000) {
-                                        //     res.json({ success: false, message: 'Email or Username already exist.'});
-                                        // } else {
-                                        //     if (err.errors) {
-                                        //         if (err.errors.firstName) {
-                                        //             res.json({success: false, message: err.errors.firstName.message});
-                                        //         } else {
-                                        //             if (err.errors.lastName) {
-                                        //                 res.json({success: false, message: err.errors.lastName.message
-                                        //                 });
-                                        //             } else {
-                                        //                 if(err.errors.username){
-                                        //                     res.json({success: false, message: err.errors.username.message});
-                                        //
-                                        //                 }else {
-                                        //                     if (err.errors.password) {
-                                        //                         res.json({success: false, message: err.errors.password.message
-                                        //                         });
-                                        //                     } else {
-                                        //                         if (err.errors.email) {
-                                        //                             res.json({success: false, message: err.errors.email.message
-                                        //                             });
-                                        //                         } else {
-                                        //                             if (err.errors.telephone) {
-                                        //                                 res.json({success: false, message: err.errors.telephone.message
-                                        //                                 });
-                                        //                             } else {
-                                        //                                 res.json({success: false, message: err}); // Return any other error not already covered
-                                        //                             }
-                                        //                         }
-                                        //                     }
-                                        //                 }
-                                        //             }
-                                        //         }
-                                                res.json({success: false, message: err})
+                                        //Check if error is an error indicating duplicate account
+                                        if (err.code === 11000) {
+                                            res.json({ success: false, message: 'Email or Username already exist.'});
+                                        } else {
+                                            if (err.errors) {
+                                                if (err.errors.firstName) {
+                                                    res.json({success: false, message: err.errors.firstName.message});
+                                                } else {
+                                                    if (err.errors.lastName) {
+                                                        res.json({success: false, message: err.errors.lastName.message
+                                                        });
+                                                    } else {
+                                                        if(err.errors.username){
+                                                            res.json({success: false, message: err.errors.username.message});
+
+                                                        }else {
+                                                            if (err.errors.password) {
+                                                                res.json({success: false, message: err.errors.password.message
+                                                                });
+                                                            } else {
+                                                                if (err.errors.email) {
+                                                                    res.json({success: false, message: err.errors.email.message
+                                                                    });
+                                                                } else {
+                                                                    if (err.errors.telephone) {
+                                                                        res.json({success: false, message: err.errors.telephone.message
+                                                                        });
+                                                                    } else {
+                                                                        res.json({success: false, message: err}); // Return any other error not already covered
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
                                                 }
+                                                //         res.json({success: false, message: err})
+                                            }
 
-                                                // else {
-                                                // res.json({ success: false, message: 'Could not save user. Error: ', err }); // Return error if not related to validation
-                                                // }
+                                            else {
+                                                res.json({ success: false, message: 'Could not save user. Error: ', err }); // Return error if not related to validation
+                                            }
 
-                                        //}
-                                    //}
+                                        }
+                                    }
                                     else {
                                         res.json({success: true, message: 'Account successfully registered!'}); // Return success
                                     }
@@ -154,9 +152,11 @@ module.exports = (router) => {
                             const validPassword = owner.comparePassword(req.body.password); // Compare password provided to password in database
                             if (!validPassword) {
                                 res.json({ success: false, message: 'Password invalid' }); // Return error
-                            } else {
+                            }
+                            else {
                                 const token = jwt.sign({ ownerId: owner._id }, config.secret, { expiresIn: '24h' }); // Create a token for client
                                 res.json({ success: true, message: 'Success!', token: token, owner: { email: owner.email } }); // Return success and token to frontend
+                                //res.json({ success: true, message: 'Successfully '})
                             }
                         }
                     }
@@ -198,51 +198,56 @@ module.exports = (router) => {
         });
     });
 
-    // router.get('/profile/id', (req, res) => {
-    //     if(!req.params.id) {
-    //         res.json({success: false, message: 'id not provided'})
-    //     }else {
-    //         Owner.findOne({_id: req.params.ownerId}), (err, owner) => {
-    //             if (err) {
-    //                 res.json({success: false, message: 'not a valid id'});
-    //             } else {
-    //                 if (!owner) {
-    //                     res.json({success: false, message: 'Owner not found'});
-    //                 } else {
-    //                     res.json({success: true, owner: owner});
-    //                 }
-    //             }
-    //         }
-    //     }
-    // });
 
     router.put('/updateOwner', (req, res) => {
-                console.log(req.decoded.ownerId);
-                Owner.findOne({ _id: req.decoded.ownerId },(err, owner)=>{
-                    if(err){
-                        res.json({success: false, message: err})
+            if(!req.body.username){
+                res.json({success: false, message:'No username provided'})
+            }else {
+                if (!req.body.telephone){
+                    res.json({success:false, message:'No telephone provided'})
+                } else{
+                    if(!req.body.firstName){
+                        res.json({success:false, message:'No first name provided'})
                     }else {
-                        if(!owner){
-                            res.json({success: false, message: 'owner not provided'})
+                        if(!req.body.lastName){
+                            res.json({success:false, message:'No last name provided'})
                         }else {
-                            //owner.username = req.username;
-                            //owner.email = req.email;
-                            owner.password = req.password;
-                            owner.telephone = req.telephone;
-                            owner.firstName = req.firstName;
-                            owner.lastName = req.lastName;
-
-                            owner.save((err) => {
+                            Owner.findOne({ _id: req.decoded.ownerId },(err, owner)=>{
                                 if(err){
                                     res.json({success: false, message: err})
                                 }else {
-                                    res.json({ success: true, message: 'successfully updated'})
+                                    if(!owner){
+                                        res.json({success: false, message: 'Owner not provided'})
+                                    }else {
+
+                                        owner.username = req.body.username;
+                                        owner.telephone = req.body.telephone;
+                                        owner.firstName = req.body.firstName;
+                                        owner.lastName = req.body.lastName;
+                                        owner.street = req.body.street;
+                                        owner.city = req.body.city;
+                                        owner.state = req.body.state;
+                                        owner.zip = req.body.zip;
+
+                                        console.log(req.body);
+
+                                        owner.save((err) => {
+                                            if(err){
+                                                res.json({success: false, message: err})
+                                            }else {
+                                                console.log(owner);
+                                                res.json({ success: true, message: 'Successfully updated your profile!'})
+                                            }
+                                        })
+                                    }
                                 }
-                            })
+                            });
                         }
                     }
-                })
+                }
             }
+
+        }
     );
 
     return router; // Return router object to main index.js

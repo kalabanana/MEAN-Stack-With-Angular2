@@ -1,15 +1,13 @@
 <div *ngIf="loading">Loading!</div>
-
 <div *ngIf="!loading" id="reserveForm"  class="panel panel-default">
 
-  <div class="panel-body text-center">
+  <div class="panel-body text-center back">
     <span id="header2">Reserve a table with Crepe House now!</span>
     <div class="row show-hide-message">
       <div [ngClass]="messageClass">
         {{message}}
       </div>
     </div>
-
     <form class="form-inline" [formGroup]="reserveForm" (submit)="onReserveSubmit()"><br>
       <div class="form-group">
         <div [ngClass]="{'has-error':(reserveForm.controls.name.errors && reserveForm.controls.name.dirty),
@@ -48,8 +46,8 @@
             <!--&lt;!&ndash;<li *ngIf="(reserveForm.controls.date.errors?.minLength || reserveForm.controls.date.errors?.maxlength) && reserveForm.controls.date.dirty" >Store hour is between 9 AM to 5 PM</li>&ndash;&gt;-->
           <!--</ul>-->
         <!--</div>-->
-        <div class="form-group">
-          <button [disabled]="processing || !reserveForm.valid" type="submit" class="btn btn-primary">Reserve</button>
+        <div class="form-group" style="margin-bottom: 10px; ">
+          <button [disabled]="processing || !reserveForm.valid" type="submit" class="btn btn-primary">Reserve Now</button>
         </div>
       </div>
     </form>
