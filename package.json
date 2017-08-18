@@ -28,7 +28,9 @@
     "cors": "^2.8.4",
     "express": "^4.15.3",
     "jsonwebtoken": "^7.4.2",
+    "lodash": "^4.17.4",
     "mongoose": "^4.10.8",
+    "ng2-filter-pipe": "^0.1.10",
     "path-to-regexp": "^1.7.0"
   },
   "devDependencies": {

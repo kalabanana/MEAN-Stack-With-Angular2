@@ -13,7 +13,8 @@ import { EditConfirmationComponent} from "./components/confirmation/edit-confirm
 import { BookingListComponent } from "./components/booking-list/booking-list.component"
 import { DeleteConfirmationComponent } from "./components/confirmation/delete-confirmation/delete-confirmation.component"
 import { CustomerListComponent } from "./components/customer-list/customer-list.component"
-import { CustomerComponent } from "./components/customer-list/customer/customer.component"
+//import { ReserveFormComponent } from "./components/reserve-form/reserve-form.component"
+
 
 const appRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent},// , canActivate: [AuthGuard]
@@ -25,7 +26,8 @@ const appRoutes: Routes = [
   { path: 'remove-confirm/:id', component: DeleteConfirmationComponent}, //, canActivate:[NotAuthGuard]
   { path: 'booking-list', component: BookingListComponent}, //, canActivate:[AuthGuard]
   { path: 'login', component: LoginComponent},//, canActivate: [NotAuthGuard]
-  { path: 'customer-list', component: CustomerComponent}, //, canActivate:[AuthGuard]
+  { path: 'customer-list', component: CustomerListComponent}, //, canActivate:[AuthGuard]
+  // { path: 'reserve-form', component: ReserveFormComponent},//, canActivate: [NotAuthGuard]
   { path: '', component:HomeComponent},
   { path: '**', component: HomeComponent },
 ];

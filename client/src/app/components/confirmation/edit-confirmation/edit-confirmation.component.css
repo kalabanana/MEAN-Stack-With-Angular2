@@ -15,6 +15,13 @@
   opacity: 1;
 }
 #code{
-  margin: auto;
+  text-align: center;
   width: 100%;
+}
+
+#code strong span {
+  font-size: 20px;
+  background-color: rgba(53,179,65,0.75);
+  border-radius: 20px;
+  padding: 5px;
 }

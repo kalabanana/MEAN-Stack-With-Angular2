@@ -17,8 +17,8 @@ module.exports = (router) => {
                         res.json({success: false, message: "You must provide a telephone"})
                     } else {
                         let booking = new Book({
-                            name: req.body.name.toLowerCase(),
-                            party: req.body.party.toString(),
+                            name: req.body.name,
+                            party: req.body.party,
                             date: req.body.date,
                             telephone: req.body.telephone,
                             startTime: (new Date(req.body.date).getTime()),
@@ -71,7 +71,7 @@ module.exports = (router) => {
                     res.json({success: true, bookings: bookings})
                 }
             }
-        }).sort({'name': 1}) //-1 descending order
+        }).sort({'date': -1}) //-1 descending order
     })
 
 

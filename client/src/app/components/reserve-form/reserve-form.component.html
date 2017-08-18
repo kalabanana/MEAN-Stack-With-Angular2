@@ -11,31 +11,35 @@
     <form class="form-inline" [formGroup]="reserveForm" (submit)="onReserveSubmit()"><br>
       <div class="form-group">
         <div [ngClass]="{'has-error':(reserveForm.controls.name.errors && reserveForm.controls.name.dirty),
-        'has-success':!(reserveForm.controls.name.errors)}" class="form-group">
+        'has-success':!(reserveForm.controls.name.errors) && reserveForm.controls.name.dirty}" class="form-group">
           <input type="text" class="form-control" name="name" id="name" placeholder="Customer Name" formControlName="name" required>
           <ul class="help-block ">
             <li *ngIf="reserveForm.controls.name.errors?.required && reserveForm.controls.name.dirty">This field is required</li>
           </ul>
         </div>
         <div [ngClass]="{'has-error':(reserveForm.controls.party.errors && reserveForm.controls.party.dirty),
-        'has-success':!(reserveForm.controls.party.errors) }" class="form-group">
-          <input type="number" class="form-control" name="party" id="party" placeholder="Party Size" formControlName="party" required>
+        'has-success':!(reserveForm.controls.party.errors) && reserveForm.controls.party.dirty }" class="form-group">
+          <input style="width: 110px" type="number" class="form-control" name="party" id="party" placeholder="Party Size" formControlName="party" min="1" max="20" required>
           <ul class="help-block ">
             <li *ngIf="reserveForm.controls.party.errors?.required && reserveForm.controls.party.dirty">This field is required</li>
+            <li *ngIf="reserveForm.controls.party.errors?.maxlength && reserveForm.controls.party.dirty">We only serve party size maximum of 20. </li>
+            <li *ngIf="reserveForm.controls.party.errors?.minlength && reserveForm.controls.party.dirty">Please enter valid party size. </li>
           </ul>
         </div>
         <div [ngClass]="{'has-error':(reserveForm.controls.date.errors && reserveForm.controls.date.dirty),
-        'has-success':!(reserveForm.controls.date.errors) }" class="form-group">
-          <input type="datetime-local" name="date" id="date"  class="form-control" [min]="today" formControlName="date" required>
+        'has-success':!(reserveForm.controls.date.errors) && reserveForm.controls.date.dirty }" class="form-group">
+          <input type="datetime-local" name="date" id="date"  class="form-control" formControlName="date" required>
           <ul class="help-block ">
             <li *ngIf="reserveForm.controls.date.errors?.required && reserveForm.controls.date.dirty">This field is required</li>
+            <li *ngIf="reserveForm.controls.date.errors?.validateTime && reserveForm.controls.date.dirty">{{reserveForm.controls.date.errors.validateTime.err}}</li>
           </ul>
         </div>
         <div [ngClass]="{'has-error':(reserveForm.controls.telephone.errors && reserveForm.controls.telephone.dirty),
-        'has-success':!(reserveForm.controls.telephone.errors) }" class="form-group">
+        'has-success':!(reserveForm.controls.telephone.errors) && reserveForm.controls.telephone.dirty }" class="form-group">
           <input type="telephone" name="telephone" id="telephone"  class="form-control" placeholder="Telephone" formControlName="telephone" required>
           <ul class="help-block ">
             <li *ngIf="reserveForm.controls.telephone.errors?.required && reserveForm.controls.telephone.dirty">This field is required</li>
+            <li *ngIf="reserveForm.controls.telephone.error?.validatePhone && reserveForm.controls.telephone.dirty">Please enter a valid contact number.</li>
           </ul>
         </div>
         <!--<div [ngClass]="{'has-error':(reserveForm.controls.date.errors && reserveForm.controls.date.dirty),-->

@@ -10,9 +10,9 @@
     <div *ngIf="!loading" class="panel-body" style="font-family: 'Merriweather', serif">
       <span style="font-size: 16px"><i>Thank you for reserving with The Crepe House !</i></span> <br>
       Reservation Code is: <br>
-      <form [formGroup]="confirmForm" *ngIf="booking" (submit)="updateEditSubmit()">
+      <form [formGroup]="confirmForm" *ngIf="booking" (submit)="updateEditSubmit()"><br>
         <div id="code">
-          <strong style="font-size: 20px"> {{id}} </strong>
+          <strong> <span class="badge badge-success">{{id}}</span> </strong>
         </div>
         <br><br>
         <div class="row show-hide-message">

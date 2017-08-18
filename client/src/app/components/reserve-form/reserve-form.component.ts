@@ -16,6 +16,7 @@ export class ReserveFormComponent implements OnInit {
   messageClass;
   message;
   loading = false;
+  err;
 
   createForm() {
     this.reserveForm = this.formBuilder.group({
@@ -23,15 +24,51 @@ export class ReserveFormComponent implements OnInit {
         Validators.required,])],
       party: ['', Validators.compose([
         Validators.required,
+        Validators.maxLength(20),
+        Validators.minLength(1),
       ])],
       date: ['', Validators.compose([
-        Validators.required])],
+        Validators.required,
+        this.validateTime])],
       telephone: ['', Validators.compose([
-        Validators.required])],
-      // time: ['', Validators.compose([
-      //   Validators.required])],
-
+        Validators.required,
+        this.validatePhone])],
     })
+  }
+  validatePhone(controls){
+    const regExp = new RegExp(/^(1?(-?\d{3})-?)?(\d{3})(-?\d{4})$/);
+    if(regExp.test(controls.value)){
+      return null;
+    }else{
+      return {'validatePhone': true}
+    };
+  }
+  validateTime(controls) {
+    const t = (new Date(controls.value));
+    if (t.getTime() < Date.now()) {
+      return {
+        validateTime: {
+          err: 'You must pick a future time'
+        }
+      }
+    } else {
+      if (t.getDay() == 1) {
+        return {
+          validateTime: {
+            err: 'Crepe House closes on Sunday'
+          }
+        }
+      } else {
+        if (t.getHours() < 11 || t.getHours() > 21) {
+          return {
+            validateTime:{
+              err: 'Crepe House opens at 11 AM and closes at 9PM '
+            }
+          }
+        }
+      }
+    }
+    return null;
   }
 
   constructor(private formBuilder: FormBuilder,

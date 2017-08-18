@@ -1,29 +1,42 @@
-<div class="row affix-row">
-  <div class="affix-sidebar">
-    <div class="sidebar-nav">
-      <div class="navbar navbar-default" role="navigation">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
+<div class="row" style="display: flex; margin-left: 20px">
+
+  <div class="row affix-row col-md-2">
+    <div class="affix-sidebar">
+      <div class="sidebar-nav">
+        <div class="navbar navbar-default" role="navigation">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div>
+            <ul class="nav navbar-nav" id="sidenav01">
+              <li class="active">
+                <h4 style="margin-left: 8px">
+                  Contact List
+                  <hr>
+                </h4>
+                <ul class="nav nav-list contacts" *ngFor="let item of contactList, let i = index">
+                  <h4 data-toggle="collapse" [attr.data-target]="'#contact'+i" class="collapsed">{{item[0]}}<span class="caret"></span></h4>
+                  <div class="collapse" [id]="'contact'+i">
+                    <ul class="nav nav-list contacts" *ngFor="let contact of item[1] | orderBy:['name'] " >
+                      <li><a>{{contact.name}}</a></li>
+                    </ul>
+                  </div>
+                </ul>
+              </li>
+            </ul>
+          </div><!--/.nav-collapse -->
         </div>
-        <div class="navbar-collapse collapse sidebar-navbar-collapse">
-          <ul class="nav navbar-nav" id="sidenav01">
-            <li class="active">
-              <h4>
-                Contact List
-                <br>
-              </h4>
-              <ul class="nav nav-list contacts" *ngFor="let contact of contactList">
-                <li><a (click)="">{{contact.name}}</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div><!--/.nav-collapse -->
       </div>
     </div>
   </div>
+
+  <div>
+    <app-customer></app-customer>
+  </div>
+
 </div>

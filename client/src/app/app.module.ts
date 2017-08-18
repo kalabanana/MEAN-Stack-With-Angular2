@@ -37,6 +37,8 @@ import { TableViewComponent } from "./components/table/table-view/table-view.com
 import { CustomerComponent } from "./components/customer-list/customer/customer.component";
 import { CustomerListComponent } from "./components/customer-list/customer-list.component"
 
+import { OrderBy } from "./pipes/array-sort.pipe";
+import { Ng2FilterPipe } from "ng2-filter-pipe";
 
 @NgModule({
   declarations: [
@@ -59,6 +61,8 @@ import { CustomerListComponent } from "./components/customer-list/customer-list.
     DeleteConfirmationComponent,
     CustomerComponent,
     CustomerListComponent,
+    OrderBy,
+    Ng2FilterPipe,
 
   ],
   imports: [

@@ -155,8 +155,7 @@ module.exports = (router) => {
                             }
                             else {
                                 const token = jwt.sign({ ownerId: owner._id }, config.secret, { expiresIn: '24h' }); // Create a token for client
-                                res.json({ success: true, message: 'Success!', token: token, owner: { email: owner.email } }); // Return success and token to frontend
-                                //res.json({ success: true, message: 'Successfully '})
+                                res.json({ success: true, message: 'Successfully Login! Redirecting Now!', token: token, owner: { email: owner.email} }); // Return success and token to frontend
                             }
                         }
                     }
@@ -165,88 +164,86 @@ module.exports = (router) => {
         }
     });
 
-    //Middleware to get the decoded token
-
-    // router.use((req, res, next) => {
-    //     const token = req.headers['authorization']; // Create token found in headers
-    //     if (!token) {
-    //         res.json({ success: false, message: 'No token provided' }); // Return error
-    //     } else {
-    //         jwt.verify(token, config.secret, (err, decoded) => {
-    //             if (err) {
-    //                 res.json({ success: false, message: 'Token invalid: ' + err });
-    //             } else {
-    //                 req.decoded = decoded;
-    //                 next();
-    //             }
-    //         });
-    //     }
-    // });
-
 
     router.get('/profile', (req, res) => {
-        Owner.findOne({ _id: req.decoded.ownerId }).select('username email firstName lastName telephone').exec((err, owner) => {
-            if (err) {
-                res.json({ success: false, message: err });
-            } else {
-                if (!owner) {
-                    res.json({ success: false, message: 'Owner not found' });
-                } else {
-                    res.json({ success: true, owner: owner });
-                }
+        const token = req.headers['authorization'];
+        jwt.verify(token, config.secret, (err, decoded)=>{
+            if(err){
+                res.json({success: false, message:'invalid token'+err})
+            }else {
+                req.decoded = decoded;
+                Owner.findOne({ _id: req.decoded.ownerId}).select('username email firstName lastName telephone').exec((err, owner) => {
+                    if (err) {
+                        res.json({ success: false, message: err });
+                    } else {
+                        if (!owner) {
+                            res.json({ success: false, message: 'Owner not found' });
+                        } else {
+                            res.json({ success: true, owner: owner });
+                        }
+                    }
+                });
             }
         });
+
     });
 
 
     router.put('/updateOwner', (req, res) => {
-            if(!req.body.username){
-                res.json({success: false, message:'No username provided'})
-            }else {
-                if (!req.body.telephone){
-                    res.json({success:false, message:'No telephone provided'})
-                } else{
-                    if(!req.body.firstName){
-                        res.json({success:false, message:'No first name provided'})
+            const token = req.headers['authorization'];
+            jwt.verify(token, config.secret, (err, decoded)=>{
+                if(err){
+                    res.json({ success: false, message:'invalid token' + err})
+                }else {
+                    req.decoded = decoded;
+                    if(!req.body.username){
+                        res.json({success: false, message:'No username provided'})
                     }else {
-                        if(!req.body.lastName){
-                            res.json({success:false, message:'No last name provided'})
-                        }else {
-                            Owner.findOne({ _id: req.decoded.ownerId },(err, owner)=>{
-                                if(err){
-                                    res.json({success: false, message: err})
+                        if (!req.body.telephone){
+                            res.json({success:false, message:'No telephone provided'})
+                        } else{
+                            if(!req.body.firstName){
+                                res.json({success:false, message:'No first name provided'})
+                            }else {
+                                if(!req.body.lastName){
+                                    res.json({success:false, message:'No last name provided'})
                                 }else {
-                                    if(!owner){
-                                        res.json({success: false, message: 'Owner not provided'})
-                                    }else {
-
-                                        owner.username = req.body.username;
-                                        owner.telephone = req.body.telephone;
-                                        owner.firstName = req.body.firstName;
-                                        owner.lastName = req.body.lastName;
-                                        owner.street = req.body.street;
-                                        owner.city = req.body.city;
-                                        owner.state = req.body.state;
-                                        owner.zip = req.body.zip;
-
-                                        console.log(req.body);
-
-                                        owner.save((err) => {
-                                            if(err){
-                                                res.json({success: false, message: err})
+                                    Owner.findOne({ _id: req.decoded.ownerId },(err, owner)=>{
+                                        if(err){
+                                            res.json({success: false, message: err})
+                                        }else {
+                                            if(!owner){
+                                                res.json({success: false, message: 'Owner not provided'})
                                             }else {
-                                                console.log(owner);
-                                                res.json({ success: true, message: 'Successfully updated your profile!'})
+
+                                                owner.username = req.body.username;
+                                                owner.telephone = req.body.telephone;
+                                                owner.firstName = req.body.firstName;
+                                                owner.lastName = req.body.lastName;
+                                                owner.street = req.body.street;
+                                                owner.city = req.body.city;
+                                                owner.state = req.body.state;
+                                                owner.zip = req.body.zip;
+
+                                                console.log(req.body);
+
+                                                owner.save((err) => {
+                                                    if(err){
+                                                        res.json({success: false, message: err})
+                                                    }else {
+                                                        console.log(owner);
+                                                        res.json({ success: true, message: 'Successfully updated your profile!'})
+                                                    }
+                                                })
                                             }
-                                        })
-                                    }
+                                        }
+                                    });
                                 }
-                            });
+                            }
                         }
                     }
                 }
-            }
-
+            })
         }
     );
 

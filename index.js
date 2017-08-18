@@ -10,6 +10,7 @@ const authentication = require('./routes/authentication')(router);
 const reservation = require('./routes/reservation')(router);
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const lodash = require('lodash');
 
 
 mongoose.connect(config.uri,(err)=> {
@@ -28,7 +29,7 @@ mongoose.connect(config.uri,(err)=> {
 // }
 
 
-app.use(cors({ origin: 'http://localhost:8080' }));
+app.use(cors({ origin: 'http://localhost:4200' }));
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))

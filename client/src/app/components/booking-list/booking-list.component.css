@@ -1,3 +1,15 @@
 .navbar-form{
   margin-top: 0px;
 }
+.btn-color{
+  background: #76b852;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #489532, #76b852);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #89c252, #76b852); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border: 1px solid #86bb8e;
+}
+.color{
+  color: white;
+}
+.bookModal{
+  width: 700px;
+}
