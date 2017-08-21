@@ -42,9 +42,7 @@ export class AuthService {
   }
 
   updateOwner(owner){
-    console.log(owner);
     return this.http.put(this.domain+'/authentication/updateOwner/', owner, this.options).map(res => {
-
       console.log("send profile to database");
       console.log(res);
       return res.json()});
@@ -73,7 +71,6 @@ export class AuthService {
   getProfile() {
     this.createAuthenticationHeaders();
     return this.http.get(this.domain + '/authentication/profile', this.options).map(res => {
-      console.log(res)
       return res.json()
     });
   }

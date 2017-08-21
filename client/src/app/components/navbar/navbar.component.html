@@ -20,8 +20,6 @@
         <li *ngIf="!authService.loggedIn()"><a href="#Menu">Meet Chiefs</a></li>
         <li *ngIf="!authService.loggedIn()"><a href="#About">About</a></li>
         <li *ngIf="!authService.loggedIn()"><a href="#Location">Location</a></li>
-
-        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"*ngIf="authService.loggedIn()"><a routerLink="/profile">Profile</a></li>
         <li *ngIf="authService.loggedIn()"><a (click)="onLogout()">Logout</a></li>
 
         <li *ngIf="!authService.loggedIn()">

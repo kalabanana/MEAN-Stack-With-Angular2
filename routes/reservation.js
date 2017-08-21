@@ -47,7 +47,7 @@ module.exports = (router) => {
         } else {
             Book.findOne({ _id: req.params.id }, (err, booking) => {
                 if (err) {
-                    res.json({ success: false, message: 'Not a valid id' });
+                    res.json({ success: false, message: 'Sorry we cannot find the Code you have provided.' });
                 } else {
                     if (!booking) {
                         res.json({ success: false, message: 'ID not found.' });
@@ -58,6 +58,24 @@ module.exports = (router) => {
             });
         }
     });
+
+    router.get('/confirm/:id', (req,res)=>{
+        if (!req.body.id) {
+            res.json({ success: false, message: 'No ID was provided.' });
+        } else {
+            Book.findOne({ _id: req.body.id }, (err, booking) => {
+                if (err) {
+                    res.json({ success: false, message: 'Not a valid id' });
+                } else {
+                    if (!booking) {
+                        res.json({ success: false, message: 'ID not found.' });
+                    } else {
+                        res.json({ success: true, booking: booking });
+                    }
+                }
+            });
+        }
+    })
 
 
     router.get('/allReservations', (req, res) => {

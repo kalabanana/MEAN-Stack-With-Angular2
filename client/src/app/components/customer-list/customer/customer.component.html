@@ -1,9 +1,6 @@
 <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
 <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 <div>
-  <!--<div class="container col-md-2">-->
-    <!--<app-customer-list></app-customer-list>-->
-  <!--</div>-->
   <div class="container profile">
     <div class="row">
       <div class="span12">
@@ -13,21 +10,21 @@
               <img src="../../../../assets/img/avatar1.jpg" class="img-polaroid"/>
             </div>
             <div class="span4">
-              <h2>Customer Name</h2>
+              <h2>{{customer.name}}</h2>
               <ul class="unstyled">
-                <li><i class="icon-phone"></i>  phone number </li>
+                <li><i class="icon-phone"></i>  {{customer.telephone}}</li>
                 <li><i class="icon-envelope"></i>  N/A</li>
               </ul>
             </div>
             <div class="span6">
               <ul class="inline stats">
                 <li>
-                  <span>4</span>
+                  <span> {{customer.pastBookings.length}}</span>
                   Visited
                 </li>
 
                 <li style="color: rgba(10,123,12,0.67)">
-                  <span>4</span>
+                  <span>{{customer.pastBookings.length}}</span>
                   Positive
                 </li>
 
@@ -36,8 +33,8 @@
                   Negative
                 </li>
               </ul>
-              <div><!--/span6-->
-              </div><!--/row-->
+              <div>
+              </div>
             </div>
             <!--Body content-->
           </div>
@@ -46,23 +43,21 @@
         <div class="well clearfix">
           <table class="table">
             <tr>
-              <th>Table ID</th>
+              <th>Confirmation Code</th>
+              <th>Table Number</th>
               <th>Reservation Date</th>
               <th>Party Size</th>
-              <th>Confirmation Code</th>
               <th>Status</th>
             </tr>
 
-            <tr>
-              <!--*ngFor="let reservation of reservations | paginate: { itemsPerPage: 20, currentPage: p}"-->
-              <td>tableId</td>
-              <td>date</td>
-              <td>party</td>
-              <td>id </td>
-              <td>status</td>
+            <tr *ngFor="let booking of customer.pastBookings">
+              <td [routerLink]="['/edit-confirm/',booking._id]"><span class="btn btn-success">{{booking._id}}</span></td>
+              <td>{{booking.tableId}}</td>
+              <td>{{booking.date | date:'medium'}}</td>
+              <td>{{booking.party}}</td>
+              <td class="badge">Coming Soon</td>
             </tr>
             </tbody>
-            <pagination-controls (pageChange)="p = $event"></pagination-controls>
           </table>
         </div>
       </div>

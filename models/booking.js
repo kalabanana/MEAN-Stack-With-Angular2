@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 //creates a new schema
 
 const bookingSchema = new Schema({
-    name: {type: String, required: true, lowercase: true}, //validate adds here
+    name: {type: String, required: true}, //validate adds here
     party: {type: Number, required:true},
     date: {type: Date, required: true},
     telephone:{type: String, required: true},

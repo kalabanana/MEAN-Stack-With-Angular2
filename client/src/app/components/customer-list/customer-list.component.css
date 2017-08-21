@@ -1,6 +1,11 @@
 .contacts{
-  width: 100px;
+  width: 110px;
+  margin-left: 15px;
+  background-color: inherit;
 }
 .caret{
   margin-top: 4px;
+}
+.col-md-2{
+  width: 150px;
 }

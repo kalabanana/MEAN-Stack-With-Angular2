@@ -172,7 +172,7 @@ module.exports = (router) => {
                 res.json({success: false, message:'invalid token'+err})
             }else {
                 req.decoded = decoded;
-                Owner.findOne({ _id: req.decoded.ownerId}).select('username email firstName lastName telephone').exec((err, owner) => {
+                Owner.findOne({ _id: req.decoded.ownerId}).select('username email firstName lastName telephone street city state zip').exec((err, owner) => {
                     if (err) {
                         res.json({ success: false, message: err });
                     } else {

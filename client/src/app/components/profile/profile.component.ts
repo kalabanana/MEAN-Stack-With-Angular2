@@ -33,15 +33,15 @@ export class ProfileComponent implements OnInit {
       }else {
         this.loading = false;
         this.owner = profile.owner;
-        this.email = profile.owner.email;
-        this.username = profile.owner.username;
-        this.firstName = profile.owner.firstName;
-        this.lastName = profile.owner.lastName;
-        this.telephone = profile.owner.telephone;
-        this.street = profile.owner.street;
-        this.city = profile.owner.city;
-        this.state = profile.owner.state;
-        this.zip = profile.owner.zip;
+        // this.email = profile.owner.email;
+        // this.username = profile.owner.username;
+        // this.firstName = profile.owner.firstName;
+        // this.lastName = profile.owner.lastName;
+        // this.telephone = profile.owner.telephone;
+        // this.street = profile.owner.street;
+        // this.city = profile.owner.city;
+        // this.state = profile.owner.state;
+        // this.zip = profile.owner.zip;
       }
     });
   }

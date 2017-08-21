@@ -33,12 +33,13 @@ import {AllBookingService} from "./services/all-booking.service";
 
 import { AuthGuard } from "./guards/auth.guard";
 import { NotAuthGuard } from "./guards/notAuth.guard";
-import { TableViewComponent } from "./components/table/table-view/table-view.component";
 import { CustomerComponent } from "./components/customer-list/customer/customer.component";
 import { CustomerListComponent } from "./components/customer-list/customer-list.component"
 
 import { OrderBy } from "./pipes/array-sort.pipe";
 import { Ng2FilterPipe } from "ng2-filter-pipe";
+import { TableItemComponent } from "./components/table/table-item/table-item.component"
+import { TableListComponent } from "./components/table/table-list/table-list.component"
 
 @NgModule({
   declarations: [
@@ -57,12 +58,13 @@ import { Ng2FilterPipe } from "ng2-filter-pipe";
     ConfirmationComponent,
     EditConfirmationComponent,
     BookingListComponent,
-    TableViewComponent,
     DeleteConfirmationComponent,
     CustomerComponent,
     CustomerListComponent,
     OrderBy,
     Ng2FilterPipe,
+    TableItemComponent,
+    TableListComponent,
 
   ],
   imports: [

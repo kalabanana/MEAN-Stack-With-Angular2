@@ -10,11 +10,14 @@ import { Router } from "@angular/router"
 })
 export class ReserveFormComponent implements OnInit {
   reserveForm;
+  confirmForm;
   showDialog = false;
   processing = false;
 
   messageClass;
   message;
+  messageClass1;
+  message1;
   loading = false;
   err;
 
@@ -33,7 +36,10 @@ export class ReserveFormComponent implements OnInit {
       telephone: ['', Validators.compose([
         Validators.required,
         this.validatePhone])],
-    })
+    });
+    this.confirmForm= this.formBuilder.group({
+      id:['']
+    });
   }
   validatePhone(controls){
     const regExp = new RegExp(/^(1?(-?\d{3})-?)?(\d{3})(-?\d{4})$/);
@@ -52,7 +58,7 @@ export class ReserveFormComponent implements OnInit {
         }
       }
     } else {
-      if (t.getDay() == 1) {
+      if (t.getDay() == 7) {
         return {
           validateTime: {
             err: 'Crepe House closes on Sunday'
@@ -127,6 +133,25 @@ export class ReserveFormComponent implements OnInit {
         }
       }
     )
+  }
+
+  getReservation(){
+    this.processing = true;
+    const booking = {
+      id: this.confirmForm.get('id').value,
+    }
+    this.bookService.getReservation(booking).subscribe(data =>{
+      if(!data.success){
+        this.messageClass1 = 'alert alert-warning';
+        this.message1 = data.message;
+      }else {
+        this.messageClass1 = 'alert alert-success'
+        this.message1 = data.message;
+        setTimeout(() =>{
+          this.router.navigate(['/confirmCode', data.id])
+        }, 1000);
+      }
+    })
   }
 }
 

@@ -1,5 +1,7 @@
-<div class="row" style="display: flex; margin-left: 20px">
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
+<div class="row" style="display: flex; margin-left: 20px">
   <div class="row affix-row col-md-2">
     <div class="affix-sidebar">
       <div class="sidebar-nav">
@@ -14,7 +16,7 @@
           </div>
           <div>
             <ul class="nav navbar-nav" id="sidenav01">
-              <li class="active">
+              <li>
                 <h4 style="margin-left: 8px">
                   Contact List
                   <hr>
@@ -22,8 +24,8 @@
                 <ul class="nav nav-list contacts" *ngFor="let item of contactList, let i = index">
                   <h4 data-toggle="collapse" [attr.data-target]="'#contact'+i" class="collapsed">{{item[0]}}<span class="caret"></span></h4>
                   <div class="collapse" [id]="'contact'+i">
-                    <ul class="nav nav-list contacts" *ngFor="let contact of item[1] | orderBy:['name'] " >
-                      <li><a>{{contact.name}}</a></li>
+                    <ul class="nav nav-list contacts name" *ngFor="let contact of item[1] | orderBy:['name']">
+                      <li (click)="onSelect(contact)"><a>{{contact.name}}</a></li>
                     </ul>
                   </div>
                 </ul>
@@ -35,8 +37,7 @@
     </div>
   </div>
 
-  <div>
-    <app-customer></app-customer>
+  <div *ngIf="selectedContact">
+    <app-customer [customer]="selectedContact">Hello</app-customer>
   </div>
-
 </div>

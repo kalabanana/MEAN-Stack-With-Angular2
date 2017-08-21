@@ -1,0 +1,66 @@
+.tables {
+  background-color: #2091c4;
+  background-size: 10px 20px;
+  margin: 30px;
+  align-content: space-around;
+  wrap-option: auto;
+}
+.panel-heading{
+  background-color: rgba(83,137,158,0.53);
+  border: 2px rgba(56,92,106,0.53);
+}
+.panel-title{
+  color: white;
+}
+.btns{
+  float: left;
+}
+.p0{
+  background-color: #0a93a6;
+}
+.p1{
+  background-color: rgb(34, 76, 128);
+}
+.p2{
+  background-color: #1c2c80;
+}
+.p3{
+  background-color: #76b852;
+  border: rgba(67,151,87,0.88);
+}
+.color{
+  color: white;
+}
+.badge{
+  height: 25px;
+  width: 70px;
+  line-height: 20px;
+  background-color: rgb(217, 52, 49);
+}
+.tableID{
+  font-size: 2em;
+  font-weight: 700;
+  background-color: white;
+  margin-right: -5px;
+}
+.confirmList{
+  list-style: none;
+  padding: 5px;
+  font-size: large;
+  margin:auto;
+  border: 3px #135691;
+
+}
+.badgeTable{
+  padding: 5px;
+  background: rgba(38,98,148,0.29);
+  border: 3px #135691;
+  margin-left: 90px;
+  width: 60%;
+  border-radius: 25px;
+  color: #25406a;
+}
+.badgeTable:hover{
+  background: rgba(67, 151, 87, 0.29);
+  cursor: pointer;
+}

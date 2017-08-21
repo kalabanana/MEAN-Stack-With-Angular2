@@ -1,0 +1,43 @@
+<h1 class="page-header">Table View</h1>
+<div>
+  <a class="btn btn-primary p3" (click)="showDialog1 = !showDialog1" style="float: right">
+    <span>
+      Add Reservation</span>
+  </a>
+</div>
+<div class="btns">
+  <a class="btn btn-primary p1" (click)="getTodayReservation()">Today</a>
+  <a class="btn btn-primary p2" (click)="getTomorrowReservation()">Tomorrow</a>
+  <a class="btn btn-primary p0" (click)="allTables()">All Reservations</a>
+</div><br><br>
+
+<div class="container panel panel-default">
+  <div class="row panel-body">
+
+    <div class="panel-heading">
+      <h4 *ngIf="isAll" class="panel-title">All reserved tables</h4>
+      <h4 *ngIf="isTomorrow" class="panel-title">Tomorrow's reserved tables: <span style="color: rgba(0,13,75,0.53); font-weight: 800; font-size: large"> {{tomorrow | date: 'medium'}}</span></h4>
+      <h4 *ngIf="isToday" class="panel-title">Today's reserved tables: <span style="color: rgba(0,13,75,0.53); font-weight: 800; font-size: large"> {{today | date: 'medium'}}</span></h4>
+    </div>
+
+    <span *ngFor="let resTable of tableList  | orderBy:['tableId']" (click)="onSelect(resTable)" >
+      <span class="tables" >
+        <span class="badge">Reserved</span>
+        <img src="../../../../assets/img/table.png" height="100" width="100"/>
+        <span class="tableID">#{{resTable.tableId}}</span>
+      </span>
+    </span>
+    <hr>
+  </div>
+</div>
+
+<app-modal [(visible)]="showDialog" *ngIf="selectedTable">
+<ul class="confirmList text-center" *ngFor="let table of selectedTable.pastBookings">
+  <li class="badgeTable" [routerLink]="['/edit-confirm/', table._id]"> <span class="glyphicon glyphicon-apple"></span>  {{table._id}}</li>
+  <li style="font-size: larger">{{table.name}}: {{table.date | date:'medium'}}</li>
+</ul>
+</app-modal>
+
+<app-modal [(visible)]="showDialog1">
+  <app-reserve-form></app-reserve-form>
+</app-modal>

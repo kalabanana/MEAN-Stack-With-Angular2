@@ -26,6 +26,7 @@ export class BookingListComponent implements OnInit, OnDestroy {
   p: number = 1;
   collection: any[];
   reservationFilter: any = {_id: ''};
+  today = (new Date().toDateString);
 
   ngOnInit() {
     this.loading = true;
@@ -51,6 +52,9 @@ export class BookingListComponent implements OnInit, OnDestroy {
     })
     this.loading = false;
   };
+  getToday(today: String){
+    //this.today = today;
+  }
 
 
 }

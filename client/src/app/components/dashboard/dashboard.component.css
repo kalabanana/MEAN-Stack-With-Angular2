@@ -1,0 +1,29 @@
+.outer{
+  display: flex;
+  align-content: space-between;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  background: #ffffff; /* Old browsers */
+  background: -moz-linear-gradient(top, #ffffff 0%, #f4f5f6 0%, #f5f6f7 7%, #f9f9f9 11%, #ffffff 50%, #f9f9f9 86%, #f7f7f7 90%, #f7f7f7 100%, #fbfbfb 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #ffffff 0%,#f4f5f6 0%,#f5f6f7 7%,#f9f9f9 11%,#ffffff 50%,#f9f9f9 86%,#f7f7f7 90%,#f7f7f7 100%,#fbfbfb 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #ffffff 0%,#f4f5f6 0%,#f5f6f7 7%,#f9f9f9 11%,#ffffff 50%,#f9f9f9 86%,#f7f7f7 90%,#f7f7f7 100%,#fbfbfb 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#fbfbfb',GradientType=0 ); /* IE6-9 */
+  border: 1px solid rgba(22, 42, 85, 0.3);
+}
+.inner{
+  margin: 70px 20px 70px 20px;
+  padding: 10px;
+  box-shadow: 5px 10px 10px rgba(219,219,219,0.53);
+
+}
+a{
+  margin: 20px 0px 20px 0px;
+  align-items: center;
+  text-align: center;
+}
+.btn{
+  border: none;
+}
+.btn-success{
+  background-color: #0d6e91;
+}

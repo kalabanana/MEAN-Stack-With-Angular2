@@ -1,7 +1,6 @@
 body, html{
   height: 100%;
   background-color: #d3d3d3;
-  font-family: 'Merriweather', serif;
 }
 
 .main{
@@ -10,7 +9,6 @@ body, html{
 
 h1.title {
   font-size: 50px;
-  font-family: 'Merriweather', serif;
   font-weight: 400;
 }
 
@@ -25,7 +23,6 @@ hr{
 
 label{
   margin-bottom: 15px;
-  font-family: 'Merriweather', serif;
 
 }
 
@@ -33,7 +30,6 @@ input,
 input::-webkit-input-placeholder {
   font-size: 11px;
   padding-top: 3px;
-  font-family: 'Merriweather', serif;
 }
 
 .main-login{
@@ -51,7 +47,7 @@ input::-webkit-input-placeholder {
 
 .main-center{
   margin: 0 auto;
-  max-width: 330px;
+  max-width: 300px;
   padding: 10px 30px;
 
 }
@@ -99,5 +95,9 @@ hr{
 }
 .table{
   display: flex;
+}
+td strong{
+  font-size: medium;
+  margin-left: 50px;
 }
 

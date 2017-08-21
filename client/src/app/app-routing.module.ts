@@ -14,7 +14,7 @@ import { BookingListComponent } from "./components/booking-list/booking-list.com
 import { DeleteConfirmationComponent } from "./components/confirmation/delete-confirmation/delete-confirmation.component"
 import { CustomerListComponent } from "./components/customer-list/customer-list.component"
 //import { ReserveFormComponent } from "./components/reserve-form/reserve-form.component"
-
+import { TableListComponent } from "./components/table/table-list/table-list.component"
 
 const appRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent},// , canActivate: [AuthGuard]
@@ -27,6 +27,7 @@ const appRoutes: Routes = [
   { path: 'booking-list', component: BookingListComponent}, //, canActivate:[AuthGuard]
   { path: 'login', component: LoginComponent},//, canActivate: [NotAuthGuard]
   { path: 'customer-list', component: CustomerListComponent}, //, canActivate:[AuthGuard]
+  { path: 'table-list', component:TableListComponent},
   // { path: 'reserve-form', component: ReserveFormComponent},//, canActivate: [NotAuthGuard]
   { path: '', component:HomeComponent},
   { path: '**', component: HomeComponent },

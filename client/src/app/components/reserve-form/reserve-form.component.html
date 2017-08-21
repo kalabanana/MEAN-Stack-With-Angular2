@@ -60,10 +60,18 @@
     <a (click)="showDialog = !showDialog" style="float: right; margin-right: 15%">Have a confirmation code already?</a>
     <!-- 后面做！ -->
     <app-modal [(visible)]="showDialog">
-      <h4 style="  font-family: 'Merriweather', serif;">Please enter confirmation code: </h4><br>
-      <input id="confirmCode" type="text" pattern="" class="form-control"><br>
-      <button routerLink="" class="btn btn-success">Submit</button>
-      <button (click)="showDialog = !showDialog" class="btn">Close</button>
+      <div class="row show-hide-message">
+        <div [ngClass]="messageClass1">
+          {{message1}}
+        </div>
+      </div>
+      <form (submit)="getReservation()">
+        <h4 style=" font-family: 'Merriweather', serif;">Please enter confirmation code: </h4><br>
+        <input id="id" type="text" class="form-control" ><br>
+        <button class="btn btn-success">Submit</button>
+        <button (click)="showDialog = !showDialog" class="btn">Close</button>
+      </form>
+
     </app-modal>
 
   </div>

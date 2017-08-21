@@ -44,7 +44,6 @@ export class BookService{
 
   getReservation(id){
     return this.http.get(this.domain + '/reservation/confirm/' + id).map(res => {
-      console.log('getting data');
       return res.json();
     })
   }
